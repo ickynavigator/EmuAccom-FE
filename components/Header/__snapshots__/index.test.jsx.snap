@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header component tests matches the Snapshot 1`] = `
+<div>
+  <div>
+    Header
+  </div>
+</div>
+`;

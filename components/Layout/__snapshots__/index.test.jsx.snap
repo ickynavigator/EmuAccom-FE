@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout component tests matches the Snapshot 1`] = `
+<div>
+  <div>
+    Header
+  </div>
+  <div>
+    test child
+  </div>
+  <footer
+    class="footer"
+  >
+    <a
+      href="/"
+      rel="noopener noreferrer"
+    >
+      Emu Accom
+    </a>
+    <a
+      href="#"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      Github source code
+    </a>
+  </footer>
+</div>
+`;
