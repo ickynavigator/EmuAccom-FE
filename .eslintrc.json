@@ -5,8 +5,8 @@
     "jest": true
   },
   "extends": [
-    "plugin:react/recommended",
     "next/core-web-vitals",
+    "plugin:react/recommended",
     "eslint-config-next",
     "airbnb",
     "prettier"

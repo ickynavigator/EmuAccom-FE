@@ -12,15 +12,19 @@
     "prettier:base": "prettier --ignore-path .eslintignore --write",
     "format": "yarn run prettier && yarn run lint --fix",
     "format:base": "yarn run lint:base --fix",
+    "format:page": "yarn run next lint",
     "test": "jest --watch --coverage",
     "test:ci": "jest --ci",
     "prepare": "husky install"
   },
   "dependencies": {
+    "@mantine/core": "^4.0.7",
+    "@mantine/form": "^4.0.7",
+    "@mantine/hooks": "^4.0.7",
+    "@mantine/next": "^4.0.7",
     "bootstrap": "^5.1.3",
     "next": "12.0.10",
     "react": "17.0.2",
-    "react-bootstrap": "^2.2.1",
     "react-dom": "17.0.2"
   },
   "devDependencies": {
@@ -40,6 +44,9 @@
     "sass": "^1.49.9"
   },
   "lint-staged": {
+    "pages/**/*.{ts,tsx,js,jsx}": [
+      "NEXT"
+    ],
     "*.{ts,tsx,js,jsx}": [
       "npm run format:base"
     ],
