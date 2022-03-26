@@ -7,12 +7,13 @@
     "start": "next start",
     "lint": "next lint",
     "lint:base": "eslint",
-    "lint:all": "yarn run lint:base './**/**.{ts,tsx,js,jsx}'",
+    "lint:page": "next lint --fix",
+    "lint:all": "yarn run lint:base './**/**.{ts,tsx,js,jsx}' && lint:page",
     "prettier": "yarn run prettier:base '**/**.{css,sass,scss,md}'",
     "prettier:base": "prettier --ignore-path .eslintignore --write",
     "format": "yarn run prettier && yarn run lint --fix",
     "format:base": "yarn run lint:base --fix",
-    "format:page": "yarn run next lint",
+    "format:page": "yarn run lint --file",
     "test": "jest --watch --coverage",
     "test:ci": "jest --ci",
     "prepare": "husky install"
@@ -44,17 +45,17 @@
     "sass": "^1.49.9"
   },
   "lint-staged": {
-    "pages/**/*.{ts,tsx,js,jsx}": [
-      "NEXT"
+    "pages/**/*.page.{ts,tsx,js,jsx}": [
+      "yarn run format:page"
     ],
-    "*.{ts,tsx,js,jsx}": [
-      "npm run format:base"
+    "*(!.page).{ts,tsx,js,jsx}": [
+      "yarn run format:base"
     ],
     "*.{css,sass,scss}": [
-      "npm run prettier:base"
+      "yarn run prettier:base"
     ],
     "*.{md,json}": [
-      "npm run prettier:base"
+      "yarn run prettier:base"
     ]
   }
 }
