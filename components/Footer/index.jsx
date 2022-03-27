@@ -6,13 +6,19 @@ export const Footer = () => {
   const year = new Date().getFullYear();
 
   return (
-    <Navbar component="footer" height={80} className={styles.footer}>
-      <Group sx={{ height: "100%" }} px={10} position="apart">
+    <Navbar component="footer" height={120} className={styles.footer}>
+      <Group
+        sx={{ height: "100%", justifyContent: "center" }}
+        px={10}
+        my={10}
+        position="apart"
+        align="center"
+      >
         <Text>
           EmuAccom - Group 5 <span>&copy; {year}</span>
         </Text>
 
-        <Group>
+        <Group sx={{ justifyContent: "center" }}>
           <Button
             component="a"
             href="https://github.com/ickynavigator/EmuAccom-FE"

@@ -15,7 +15,7 @@ export const Index = () => {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
 
   return (
-    <Header height={80}>
+    <Header py={30}>
       <Group sx={{ height: "100%" }} px={20} position="apart">
         <Text>EmuAccom</Text>
 
