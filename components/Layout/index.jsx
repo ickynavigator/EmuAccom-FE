@@ -2,10 +2,8 @@ import React from "react";
 import Footer from "../Footer";
 import Header from "../Header";
 
+// eslint-disable-next-line arrow-body-style
 export const Layout = ({ children }) => {
-  // TODO FIX THIS RETURN ISSUE
-  console.log("Layout");
-
   return (
     <div id="mainApplicationWrapper">
       <Header />
