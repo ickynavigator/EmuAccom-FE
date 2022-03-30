@@ -9,7 +9,7 @@ import {
   MediaQuery,
   Navbar,
   Text,
-  useMantineColorScheme
+  useMantineColorScheme,
 } from "@mantine/core";
 import React from "react";
 import { MoonStars, Sun } from "tabler-icons-react";
@@ -62,6 +62,10 @@ export const Index = ({ opened, setOpened }) => {
         </MediaQuery>
 
         <Group>
+          <div className={classes.links}>
+            <MenuList />
+          </div>
+
           {!isAuthenticated && (
             <>
               <Button component="a" href="/login" variant="outline">
@@ -83,10 +87,6 @@ export const Index = ({ opened, setOpened }) => {
               <MoonStars size={16} />
             )}
           </ActionIcon>
-
-          <div className={classes.links}>
-            <MenuList />
-          </div>
         </Group>
       </Group>
     </Header>
