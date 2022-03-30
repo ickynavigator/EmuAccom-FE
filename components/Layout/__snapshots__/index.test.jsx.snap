@@ -3,7 +3,7 @@
 exports[`Layout component tests matches the Snapshot 1`] = `
 <div>
   <div
-    id="mainApplicationWrapper"
+    class="mantine-AppShell-root mantine-osix87"
   >
     <nav
       class="mantine-Header-root mantine-3zo516"
@@ -11,11 +11,24 @@ exports[`Layout component tests matches the Snapshot 1`] = `
       <div
         class="mantine-Group-root mantine-14eqvt3"
       >
-        <div
-          class="mantine-Text-root mantine-Group-child mantine-1n98gqk"
+        <a
+          class="mantine-Text-root mantine-Anchor-root mantine-Group-child mantine-dpgj8d"
+          href="#"
         >
-          EmuAccom
-        </div>
+          <div
+            class="mantine-Text-root mantine-1cau8qt"
+          >
+            EmuAccom
+          </div>
+        </a>
+        <button
+          class="mantine-Burger-root mantine-MediaQuery-media mantine-Group-child mantine-yfh0ga"
+          type="button"
+        >
+          <div
+            class="mantine-1asblv6 mantine-Burger-burger"
+          />
+        </button>
         <div
           class="mantine-Group-root mantine-Group-child mantine-zah578"
         >
@@ -81,67 +94,40 @@ exports[`Layout component tests matches the Snapshot 1`] = `
               />
             </svg>
           </button>
+          <div
+            class="mantine-Group-child mantine-1sv7zgx"
+          >
+            <a
+              class="mantine-Text-root mantine-Anchor-root mantine-iwlv15"
+              href="/about"
+            >
+              About
+            </a>
+          </div>
         </div>
       </div>
     </nav>
-    <div>
-      test child
-    </div>
-    <footer
-      class="mantine-Navbar-root footer mantine-m5tmpz"
+    <div
+      class="mantine-ibbm6b mantine-AppShell-body"
     >
-      <div
-        class="mantine-Group-root mantine-118vd37"
+      <nav
+        class="mantine-Navbar-root mantine-Navbar-hidden mantine-19ywxkg"
       >
-        <div
-          class="mantine-Text-root mantine-Group-child mantine-1n98gqk"
+        <a
+          class="mantine-Text-root mantine-Anchor-root mantine-iwlv15"
+          href="/about"
         >
-          EmuAccom - Group 5 
-          <span>
-            © 
-            2022
-          </span>
+          About
+        </a>
+      </nav>
+      <main
+        class="mantine-1uearfw mantine-AppShell-main"
+      >
+        <div>
+          test child
         </div>
-        <div
-          class="mantine-Group-root mantine-Group-child mantine-1ynxbnu"
-        >
-          <a
-            class="mantine-Button-filled mantine-Button-root mantine-Group-child mantine-18s7ox8"
-            href="https://github.com/ickynavigator/EmuAccom-FE"
-            rel="noopener noreferrer"
-            target="_blank"
-            type="button"
-          >
-            <div
-              class="mantine-3xbgk5 mantine-Button-inner"
-            >
-              <span
-                class="mantine-qo1k2 mantine-Button-label"
-              >
-                Frontend source code
-              </span>
-            </div>
-          </a>
-          <a
-            class="mantine-Button-filled mantine-Button-root mantine-Group-child mantine-18s7ox8"
-            href="https://github.com/ickynavigator/EmuAccom-BE"
-            rel="noopener noreferrer"
-            target="_blank"
-            type="button"
-          >
-            <div
-              class="mantine-3xbgk5 mantine-Button-inner"
-            >
-              <span
-                class="mantine-qo1k2 mantine-Button-label"
-              >
-                Backend source code
-              </span>
-            </div>
-          </a>
-        </div>
-      </div>
-    </footer>
+      </main>
+    </div>
   </div>
 </div>
 `;
