@@ -1,6 +1,6 @@
 import { Container, Group, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import React from "react";
 import { Search } from "tabler-icons-react";
 import { fetchDorms } from "../utils/axiosRequests";
@@ -19,12 +19,12 @@ export async function getServerSideProps(context) {
 }
 
 const Index = () => {
-  const router = useRouter();
-  const { s: search } = router.query;
+  // const router = useRouter();
+  // const { s: search } = router.query;
 
   const form = useForm({
     initialValues: {
-      search,
+      search: "",
     },
 
     validate: {
