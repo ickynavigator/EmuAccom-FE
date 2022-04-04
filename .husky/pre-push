@@ -2,3 +2,5 @@
 . "$(dirname "$0")/_/husky.sh"
 
 npm run test:ci -- -u
+git add ./**/*.snap
+git commit -m "ci(husky): update snapshots"
