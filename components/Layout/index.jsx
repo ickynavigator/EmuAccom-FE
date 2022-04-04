@@ -1,15 +1,19 @@
-import React from "react";
-import Footer from "../Footer";
-import Header from "../Header";
+import { AppShell } from "@mantine/core";
+import React, { useState } from "react";
+import Header, { NavBar } from "../Header";
 
-// eslint-disable-next-line arrow-body-style
 export const Layout = ({ children }) => {
+  const [opened, setOpened] = useState(false);
+
   return (
-    <div id="mainApplicationWrapper">
-      <Header />
+    <AppShell
+      // fixed
+      navbarOffsetBreakpoint="sm"
+      header={<Header opened={opened} setOpened={setOpened} />}
+      navbar={<NavBar opened={opened} />}
+    >
       {children}
-      <Footer />
-    </div>
+    </AppShell>
   );
 };
 

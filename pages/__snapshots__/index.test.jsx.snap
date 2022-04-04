@@ -2,82 +2,73 @@
 
 exports[`Home matches the homepage Snapshot 1`] = `
 <div>
-  <div
-    class="container"
-  >
-    <main
-      class="main"
+  <div>
+    <div
+      class="mantine-Container-root mantine-len9jq"
     >
-      <h1
-        class="title"
-      >
-        Welcome to 
-        <a
-          href="https://nextjs.org"
+      <form>
+        <div
+          class="mantine-Group-root mantine-q21ep2"
         >
-          Next.js!
-        </a>
-      </h1>
-      <p
-        class="description"
-      >
-        Get started by editing
-         
-        <code
-          class="code"
-        >
-          pages/index.js
-        </code>
-      </p>
-      <div
-        class="grid"
-      >
-        <a
-          class="card"
-          href="https://nextjs.org/docs"
-        >
-          <h2>
-            Documentation →
-          </h2>
-          <p>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-        <a
-          class="card"
-          href="https://nextjs.org/learn"
-        >
-          <h2>
-            Learn →
-          </h2>
-          <p>
-            Learn about Next.js in an interactive course with quizzes!
-          </p>
-        </a>
-        <a
-          class="card"
-          href="https://github.com/vercel/next.js/tree/canary/examples"
-        >
-          <h2>
-            Examples →
-          </h2>
-          <p>
-            Discover and deploy boilerplate example Next.js projects.
-          </p>
-        </a>
-        <a
-          class="card"
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-        >
-          <h2>
-            Deploy →
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a public URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+          <div
+            class="mantine-TextInput-root mantine-Group-child mantine-919xyt"
+          >
+            <label
+              class="mantine-riils3 mantine-TextInput-label"
+              for="mantine-zctjc7te8"
+              id="mantine-zctjc7te8-label"
+            >
+              Search
+            </label>
+            <div
+              class="mantine-TextInput-wrapper mantine-12sbrde"
+            >
+              <div
+                class="mantine-1hseney mantine-TextInput-icon"
+              >
+                <svg
+                  class="icon icon-tabler icon-tabler-search"
+                  fill="none"
+                  height="24"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  viewBox="0 0 24 24"
+                  width="24"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M0 0h24v24H0z"
+                    fill="none"
+                    stroke="none"
+                  />
+                  <circle
+                    cx="10"
+                    cy="10"
+                    r="7"
+                  />
+                  <line
+                    x1="21"
+                    x2="15"
+                    y1="21"
+                    y2="15"
+                  />
+                </svg>
+              </div>
+              <input
+                aria-invalid="false"
+                class="mantine-TextInput-defaultVariant mantine-TextInput-input mantine-TextInput-withIcon mantine-riw2j3"
+                id="mantine-zctjc7te8"
+                placeholder="Search for a home"
+                type="text"
+                value=""
+              />
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 `;

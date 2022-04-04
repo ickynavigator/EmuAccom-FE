@@ -1,49 +1,60 @@
+import { Container, Group, TextInput } from "@mantine/core";
+import { useForm } from "@mantine/form";
+// import { useRouter } from "next/router";
 import React from "react";
-import styles from "../styles/Home.module.scss";
+import { Search } from "tabler-icons-react";
+import { fetchDorms } from "../utils/axiosRequests";
 
-export default function Home() {
+export async function getServerSideProps(context) {
+  const res = await fetchDorms({
+    search: context.query.s,
+    pageNumber: context.query.p,
+  });
+
+  return {
+    props: {
+      data: res.data,
+    },
+  };
+}
+
+const Index = () => {
+  // const router = useRouter();
+  // const { s: search } = router.query;
+
+  const form = useForm({
+    initialValues: {
+      search: "",
+    },
+
+    validate: {
+      search: value =>
+        value.length < 2 ? "Name must have at least 2 letters" : null,
+    },
+  });
+
+  const handleSearch = e => {
+    console.log(e);
+  };
+
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
+    <div>
+      <Container size="xs" px="xs">
+        <form onSubmit={form.onSubmit(handleSearch)}>
+          <Group align="end" position="center" grow>
+            <TextInput
+              icon={<Search />}
+              label="Search"
+              radius="xl"
+              size="md"
+              placeholder="Search for a home"
+              {...form.getInputProps("search")}
+            />
+          </Group>
+        </form>
+      </Container>
     </div>
   );
-}
+};
+
+export default Index;

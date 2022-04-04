@@ -3,9 +3,9 @@ import { store } from "../context/store";
 
 const useAuth = () => {
   const { state } = useContext(store);
+  const { user } = state;
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [user] = useState(state.user);
 
   useEffect(() => {
     if (user?.token) {
@@ -16,7 +16,7 @@ const useAuth = () => {
     }
 
     setIsLoading(false);
-  }, [user]);
+  }, [state.user, user]);
 
   return { isAuthenticated, user, isLoading };
 };

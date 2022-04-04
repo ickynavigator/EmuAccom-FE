@@ -8,14 +8,37 @@ exports[`Header component tests matches the Snapshot 1`] = `
     <div
       class="mantine-Group-root mantine-14eqvt3"
     >
-      <div
-        class="mantine-Text-root mantine-Group-child mantine-1n98gqk"
+      <a
+        class="mantine-Text-root mantine-Anchor-root mantine-Group-child mantine-dpgj8d"
+        href="#"
       >
-        EmuAccom
-      </div>
+        <div
+          class="mantine-Text-root mantine-1cau8qt"
+        >
+          EmuAccom
+        </div>
+      </a>
+      <button
+        class="mantine-Burger-root mantine-MediaQuery-media mantine-Group-child mantine-yfh0ga"
+        type="button"
+      >
+        <div
+          class="mantine-1asblv6 mantine-Burger-burger"
+        />
+      </button>
       <div
         class="mantine-Group-root mantine-Group-child mantine-zah578"
       >
+        <div
+          class="mantine-Group-child mantine-1sv7zgx"
+        >
+          <a
+            class="mantine-Text-root mantine-Anchor-root mantine-iwlv15"
+            href="/about"
+          >
+            About
+          </a>
+        </div>
         <a
           class="mantine-Button-outline mantine-Button-root mantine-ad4kob"
           href="/login"
