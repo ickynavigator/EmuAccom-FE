@@ -32,6 +32,16 @@ exports[`Layout component tests matches the Snapshot 1`] = `
         <div
           class="mantine-Group-root mantine-Group-child mantine-zah578"
         >
+          <div
+            class="mantine-Group-child mantine-1sv7zgx"
+          >
+            <a
+              class="mantine-Text-root mantine-Anchor-root mantine-iwlv15"
+              href="/about"
+            >
+              About
+            </a>
+          </div>
           <a
             class="mantine-Button-outline mantine-Button-root mantine-ad4kob"
             href="/login"
@@ -94,16 +104,6 @@ exports[`Layout component tests matches the Snapshot 1`] = `
               />
             </svg>
           </button>
-          <div
-            class="mantine-Group-child mantine-1sv7zgx"
-          >
-            <a
-              class="mantine-Text-root mantine-Anchor-root mantine-iwlv15"
-              href="/about"
-            >
-              About
-            </a>
-          </div>
         </div>
       </div>
     </nav>
