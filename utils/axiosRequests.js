@@ -11,6 +11,16 @@ const serverBase = environment => {
 };
 export const serverURL = `${serverBase(process.env.NODE_ENV)}/v1/api`;
 
+export const paramParser = params => {
+  let paramString = "?";
+  for (let i = 0; i < params.length; i += 1) {
+    if (params[i].val.length > 1)
+      paramString += `${params[i].key}=${params[i].val}&`;
+  }
+
+  return paramString;
+};
+
 export const signInRequest = data => {
   // AXIOS INTERCEPTOR
   axios.interceptors.response.use(
@@ -28,4 +38,21 @@ export const signInRequest = data => {
     password: data.password,
   };
   return axios.post(`${serverURL}/users/login`, postData);
+};
+
+export const fetchDorms = ({
+  searchParam = "",
+  search = "",
+  pageSize = 10,
+  pageNumber = 1,
+  paginate = true,
+}) => {
+  const parsedParams = paramParser([
+    { key: "param", val: searchParam },
+    { key: "keyword", val: search },
+    { key: "pageSize", val: pageSize },
+    { key: "pageNumber", val: pageNumber },
+    { key: "paginate", val: paginate },
+  ]);
+  return axios.get(`${serverURL}/dorm${parsedParams}`);
 };
