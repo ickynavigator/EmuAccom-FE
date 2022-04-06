@@ -3,47 +3,64 @@ import {
   Anchor,
   Burger,
   Button,
-  createStyles,
   Group,
   Header,
-  MediaQuery,
-  Navbar,
+  Menu,
   Text,
   useMantineColorScheme,
 } from "@mantine/core";
-import React from "react";
-import { MoonStars, Sun } from "tabler-icons-react";
+import React, { useState } from "react";
+import { MoonStars, Sun, User } from "tabler-icons-react";
 import { useAuth } from "../../hooks";
 
-const useStyles = createStyles(theme => ({
-  navbar: {
-    [theme.fn.largerThan("sm")]: {
-      display: "none",
-    },
-  },
-
-  links: {
-    [theme.fn.smallerThan("sm")]: {
-      display: "none",
-    },
-  },
-}));
-
-export const MenuList = () => {
+export const MenuList = ({
+  controlElement,
+  onCloseCallback,
+  onOpenCallback,
+}) => {
   const { isAuthenticated } = useAuth();
 
   return (
-    <>
-      <Anchor href="/about">About</Anchor>
+    <Menu
+      control={controlElement}
+      onOpen={onOpenCallback}
+      onClose={onCloseCallback}
+      withArrow
+      styles={{
+        item: {
+          paddingBlock: "0.5rem",
+        },
+      }}
+    >
+      {!isAuthenticated && (
+        <>
+          <Menu.Item>
+            <Anchor href="/signup" style={{ fontWeight: "bold" }}>
+              Sign Up
+            </Anchor>
+          </Menu.Item>
+          <Menu.Item>
+            <Anchor href="/login">Login</Anchor>
+          </Menu.Item>
+        </>
+      )}
+      <Menu.Label>Menu</Menu.Label>
+
+      <Menu.Item>
+        <Anchor href="/dorm">View Dorms</Anchor>
+      </Menu.Item>
+      <Menu.Item>
+        <Anchor href="/home">View Homes</Anchor>
+      </Menu.Item>
       {isAuthenticated && <Anchor>protected</Anchor>}
-    </>
+    </Menu>
   );
 };
 
-export const Index = ({ opened, setOpened }) => {
-  const { isAuthenticated } = useAuth();
+export const Index = () => {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
-  const { classes } = useStyles();
+  const [profileOpened, setProfileOpened] = useState(false);
+  const title = profileOpened ? "Close menu" : "Open menu";
 
   return (
     <Header py={30}>
@@ -52,30 +69,7 @@ export const Index = ({ opened, setOpened }) => {
           <Text>EmuAccom</Text>
         </Anchor>
 
-        <MediaQuery largerThan="sm" styles={{ display: "none" }}>
-          <Burger
-            opened={opened}
-            onClick={() => setOpened(o => !o)}
-            size="sm"
-            mr="xl"
-          />
-        </MediaQuery>
-
         <Group>
-          <div className={classes.links}>
-            <MenuList />
-          </div>
-
-          {!isAuthenticated && (
-            <>
-              <Button component="a" href="/login" variant="outline">
-                Login
-              </Button>
-              <Button component="a" href="/signup" variant="light">
-                Sign Up
-              </Button>
-            </>
-          )}
           <ActionIcon
             variant="default"
             onClick={() => toggleColorScheme()}
@@ -87,24 +81,20 @@ export const Index = ({ opened, setOpened }) => {
               <MoonStars size={16} />
             )}
           </ActionIcon>
+
+          <MenuList
+            controlElement={
+              <Button variant="light" radius="xl">
+                <Burger opened={profileOpened} title={title} size="sm" />
+                <User />
+              </Button>
+            }
+            onOpenCallback={() => setProfileOpened(true)}
+            onCloseCallback={() => setProfileOpened(false)}
+          />
         </Group>
       </Group>
     </Header>
-  );
-};
-
-export const NavBar = ({ opened }) => {
-  const { classes } = useStyles();
-
-  return (
-    <Navbar
-      fixed
-      className={classes.navbar}
-      width={{ base: "100%", sm: 0 }}
-      hidden={!opened}
-    >
-      <MenuList />
-    </Navbar>
   );
 };
 
