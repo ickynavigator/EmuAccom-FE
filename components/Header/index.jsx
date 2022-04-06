@@ -84,7 +84,7 @@ export const Index = () => {
 
           <MenuList
             controlElement={
-              <Button variant="light" radius="xl">
+              <Button component="div" variant="light" radius="xl">
                 <Burger opened={profileOpened} title={title} size="sm" />
                 <User />
               </Button>
