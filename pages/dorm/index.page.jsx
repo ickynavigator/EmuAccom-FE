@@ -22,21 +22,10 @@ export async function getServerSideProps(context) {
     pageSize,
   });
 
-  const dummyArray = [];
-  const dummy = res.data.dorms[0];
-  for (let i = 0; i < pageSize; i += 1) {
-    dummy.image =
-      "https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80";
-    // eslint-disable-next-line no-underscore-dangle
-    dummyArray.push({ ...dummy, _id: `${dummy._id}-${i}` });
-  }
-
   return {
     props: {
       data: {
         ...res.data,
-        dorms: dummyArray,
-        pages: 10,
       },
     },
   };
