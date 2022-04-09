@@ -1,0 +1,138 @@
+import {
+  Alert,
+  Center,
+  Container,
+  Group,
+  Pagination,
+  Space,
+  TextInput,
+} from "@mantine/core";
+import { useForm } from "@mantine/form";
+import { useRouter } from "next/router";
+import React from "react";
+import { AlertCircle, Search } from "tabler-icons-react";
+import DormCard from "../../components/Cards/DormCard";
+import { fetchDorms } from "../../utils/axiosRequests";
+
+const pageSize = 9;
+export async function getServerSideProps(context) {
+  const res = await fetchDorms({
+    search: context.query.s,
+    pageNumber: context.query.p,
+    pageSize,
+  });
+
+  const dummyArray = [];
+  const dummy = res.data.dorms[0];
+  for (let i = 0; i < pageSize; i += 1) {
+    dummy.image =
+      "https://images.unsplash.com/photo-1527004013197-933c4bb611b3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80";
+    // eslint-disable-next-line no-underscore-dangle
+    dummyArray.push({ ...dummy, _id: `${dummy._id}-${i}` });
+  }
+
+  return {
+    props: {
+      data: {
+        ...res.data,
+        dorms: dummyArray,
+        pages: 10,
+      },
+    },
+  };
+}
+
+const Index = props => {
+  const { data } = props;
+  const { dorms, page, pages } = data;
+
+  const router = useRouter();
+  const { s: currentSearch } = router.query;
+
+  const form = useForm({
+    initialValues: {
+      search: currentSearch || "",
+    },
+
+    validate: {
+      search: value =>
+        value.length < 2 ? "Name must have at least 2 letters" : null,
+    },
+  });
+
+  const changePageHandler = ({
+    newSearch = form.values.search,
+    newPage = page,
+  }) => {
+    const queries = {};
+
+    if (newSearch) {
+      queries.s = newSearch;
+    }
+    if (newPage && newPage !== page) {
+      queries.p = newPage;
+    }
+
+    router.push({
+      pathname: "/dorm",
+      query: queries,
+    });
+  };
+
+  const handleSearch = s => {
+    changePageHandler({ newSearch: s.search });
+  };
+  const handlePageChange = p => {
+    changePageHandler({ newPage: p });
+  };
+
+  return (
+    <div>
+      <Container size="xs" px="xs">
+        <form onSubmit={form.onSubmit(handleSearch)}>
+          <Group align="end" position="center" grow>
+            <TextInput
+              icon={<Search />}
+              label="Search"
+              radius="xl"
+              size="md"
+              placeholder="Search for a home"
+              {...form.getInputProps("search")}
+            />
+          </Group>
+        </form>
+      </Container>
+
+      {dorms && dorms.length > 0 ? (
+        <>
+          <Center size="xl" py="md" spacing="xs">
+            <Group>
+              {dorms.map(dorm => {
+                const { _id: id } = dorm;
+                return <DormCard key={id} {...dorm} />;
+              })}
+            </Group>
+          </Center>
+          <Center>
+            <Pagination
+              total={pages}
+              initialPage={page}
+              onChange={handlePageChange}
+              withEdges
+            />
+          </Center>
+        </>
+      ) : (
+        <Center>
+          <Alert icon={<AlertCircle size={16} />} title="Bummer!" color="red">
+            Sorry but no Dorm has been found.
+            <Space />
+            Please try different parameters
+          </Alert>
+        </Center>
+      )}
+    </div>
+  );
+};
+
+export default Index;
