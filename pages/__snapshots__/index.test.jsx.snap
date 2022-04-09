@@ -3,72 +3,7 @@
 exports[`Home matches the homepage Snapshot 1`] = `
 <div>
   <div>
-    <div
-      class="mantine-Container-root mantine-len9jq"
-    >
-      <form>
-        <div
-          class="mantine-Group-root mantine-q21ep2"
-        >
-          <div
-            class="mantine-TextInput-root mantine-Group-child mantine-919xyt"
-          >
-            <label
-              class="mantine-riils3 mantine-TextInput-label"
-              for="mantine-zctjc7te8"
-              id="mantine-zctjc7te8-label"
-            >
-              Search
-            </label>
-            <div
-              class="mantine-TextInput-wrapper mantine-12sbrde"
-            >
-              <div
-                class="mantine-1hseney mantine-TextInput-icon"
-              >
-                <svg
-                  class="icon icon-tabler icon-tabler-search"
-                  fill="none"
-                  height="24"
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  viewBox="0 0 24 24"
-                  width="24"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M0 0h24v24H0z"
-                    fill="none"
-                    stroke="none"
-                  />
-                  <circle
-                    cx="10"
-                    cy="10"
-                    r="7"
-                  />
-                  <line
-                    x1="21"
-                    x2="15"
-                    y1="21"
-                    y2="15"
-                  />
-                </svg>
-              </div>
-              <input
-                aria-invalid="false"
-                class="mantine-TextInput-defaultVariant mantine-TextInput-input mantine-TextInput-withIcon mantine-riw2j3"
-                id="mantine-zctjc7te8"
-                placeholder="Search for a home"
-                type="text"
-                value=""
-              />
-            </div>
-          </div>
-        </div>
-      </form>
-    </div>
+    home
   </div>
 </div>
 `;

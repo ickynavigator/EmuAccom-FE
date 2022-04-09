@@ -21,57 +21,9 @@ exports[`Layout component tests matches the Snapshot 1`] = `
             EmuAccom
           </div>
         </a>
-        <button
-          class="mantine-Burger-root mantine-MediaQuery-media mantine-Group-child mantine-yfh0ga"
-          type="button"
-        >
-          <div
-            class="mantine-1asblv6 mantine-Burger-burger"
-          />
-        </button>
         <div
           class="mantine-Group-root mantine-Group-child mantine-zah578"
         >
-          <div
-            class="mantine-Group-child mantine-1sv7zgx"
-          >
-            <a
-              class="mantine-Text-root mantine-Anchor-root mantine-iwlv15"
-              href="/about"
-            >
-              About
-            </a>
-          </div>
-          <a
-            class="mantine-Button-outline mantine-Button-root mantine-ad4kob"
-            href="/login"
-            type="button"
-          >
-            <div
-              class="mantine-3xbgk5 mantine-Button-inner"
-            >
-              <span
-                class="mantine-qo1k2 mantine-Button-label"
-              >
-                Login
-              </span>
-            </div>
-          </a>
-          <a
-            class="mantine-Button-light mantine-Button-root mantine-5r4v9g"
-            href="/signup"
-            type="button"
-          >
-            <div
-              class="mantine-3xbgk5 mantine-Button-inner"
-            >
-              <span
-                class="mantine-qo1k2 mantine-Button-label"
-              >
-                Sign Up
-              </span>
-            </div>
-          </a>
           <button
             class="mantine-ActionIcon-default mantine-ActionIcon-root mantine-Group-child mantine-x129ol"
             type="button"
@@ -104,22 +56,68 @@ exports[`Layout component tests matches the Snapshot 1`] = `
               />
             </svg>
           </button>
+          <div
+            class="mantine-Menu-root mantine-193ey9s"
+          >
+            <div
+              aria-controls="mantine-epqzz35so"
+              aria-expanded="false"
+              aria-haspopup="menu"
+              class="mantine-Button-light mantine-Button-root mantine-z0i7nx"
+              role="button"
+              type="button"
+            >
+              <div
+                class="mantine-3xbgk5 mantine-Button-inner"
+              >
+                <span
+                  class="mantine-qo1k2 mantine-Button-label"
+                >
+                  <button
+                    class="mantine-Burger-root mantine-1adtno5"
+                    title="Open menu"
+                    type="button"
+                  >
+                    <div
+                      class="mantine-1asblv6 mantine-Burger-burger"
+                    />
+                  </button>
+                  <svg
+                    class="icon icon-tabler icon-tabler-user"
+                    fill="none"
+                    height="24"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M0 0h24v24H0z"
+                      fill="none"
+                      stroke="none"
+                    />
+                    <circle
+                      cx="12"
+                      cy="7"
+                      r="4"
+                    />
+                    <path
+                      d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"
+                    />
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
     <div
       class="mantine-ibbm6b mantine-AppShell-body"
     >
-      <nav
-        class="mantine-Navbar-root mantine-Navbar-hidden mantine-19ywxkg"
-      >
-        <a
-          class="mantine-Text-root mantine-Anchor-root mantine-iwlv15"
-          href="/about"
-        >
-          About
-        </a>
-      </nav>
       <main
         class="mantine-1uearfw mantine-AppShell-main"
       >
