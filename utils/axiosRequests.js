@@ -40,6 +40,31 @@ export const signInRequest = data => {
   return axios.post(`${serverURL}/users/login`, postData);
 };
 
+export const signUpRequest = data => {
+  // AXIOS INTERCEPTOR
+  axios.interceptors.response.use(
+    response => response,
+    error => {
+      if (error.response.status === 401) {
+        return Promise.resolve(error);
+      }
+      if (error.response.status === 400) {
+        return Promise.resolve(error);
+      }
+      return Promise.reject(error);
+    },
+  );
+
+  const postData = {
+    email: data.email,
+    password: data.password,
+    firstName: data.fName,
+    lastName: data.fName,
+    type: data.type,
+  };
+  return axios.post(`${serverURL}/users`, postData);
+};
+
 export const fetchDorms = ({
   searchParam = "",
   search = "",
