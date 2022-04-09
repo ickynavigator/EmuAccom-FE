@@ -36,7 +36,7 @@ const Index = props => {
   const { dorms, page, pages } = data;
 
   const router = useRouter();
-  const { s: currentSearch } = router.query;
+  const currentSearch = router?.query?.s;
 
   const form = useForm({
     initialValues: {
