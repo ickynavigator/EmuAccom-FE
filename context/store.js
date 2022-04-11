@@ -1,8 +1,12 @@
+/// <reference path="../types/typedefs.js" />
 import { useLocalStorage } from "@mantine/hooks";
 import React, { createContext, useEffect, useReducer } from "react";
 import combineReducers from "react-combine-reducers";
 import { initialState as userState, userReducer } from "./user/reducer";
 
+/**
+ * @type {AppState}
+ */
 const appState = {};
 const store = createContext(appState);
 const { Provider } = store;
