@@ -9,8 +9,10 @@ import {
   Text,
   useMantineColorScheme,
 } from "@mantine/core";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { MoonStars, Sun, User } from "tabler-icons-react";
+import { LOGOUT_USER } from "../../context/constants";
+import { store } from "../../context/store";
 import { useAuth } from "../../hooks";
 
 export const MenuList = ({
@@ -19,6 +21,11 @@ export const MenuList = ({
   onOpenCallback,
 }) => {
   const { isAuthenticated } = useAuth();
+  const { dispatch } = useContext(store);
+
+  const LogoutHandler = () => {
+    dispatch({ type: LOGOUT_USER });
+  };
 
   return (
     <Menu
@@ -44,6 +51,7 @@ export const MenuList = ({
           </Menu.Item>
         </>
       )}
+
       <Menu.Label>Menu</Menu.Label>
 
       <Menu.Item>
@@ -52,7 +60,16 @@ export const MenuList = ({
       <Menu.Item>
         <Anchor href="/home">View Homes</Anchor>
       </Menu.Item>
-      {isAuthenticated && <Anchor>protected</Anchor>}
+      {isAuthenticated && (
+        <>
+          <Menu.Label>User</Menu.Label>
+
+          <Menu.Item>
+            <Anchor href="/profile">Profile</Anchor>
+          </Menu.Item>
+          <Menu.Item onClick={LogoutHandler}>Logout</Menu.Item>
+        </>
+      )}
     </Menu>
   );
 };
@@ -65,7 +82,7 @@ export const Index = () => {
   return (
     <Header py={30}>
       <Group sx={{ height: "100%" }} px={20} position="apart">
-        <Anchor href="#">
+        <Anchor href="/">
           <Text>EmuAccom</Text>
         </Anchor>
 
