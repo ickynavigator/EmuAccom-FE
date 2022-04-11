@@ -8,7 +8,7 @@ const storeLoginDetails = details => {
 
 // REDUCER
 export const userReducer = (state, action) => {
-  switch (action.type) {
+  switch (action?.type) {
     case LOGIN_USER: {
       const userDetails = storeLoginDetails(action.payload);
       return {
@@ -20,7 +20,8 @@ export const userReducer = (state, action) => {
       return {};
     }
     default: {
-      throw new Error("INVALID ACTION TYPE");
+      console.error("INVALID ACTION TYPE");
+      return state;
     }
   }
 };
