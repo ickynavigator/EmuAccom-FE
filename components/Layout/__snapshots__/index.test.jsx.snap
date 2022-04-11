@@ -13,7 +13,7 @@ exports[`Layout component tests matches the Snapshot 1`] = `
       >
         <a
           class="mantine-Text-root mantine-Anchor-root mantine-Group-child mantine-dpgj8d"
-          href="#"
+          href="/"
         >
           <div
             class="mantine-Text-root mantine-1cau8qt"
@@ -60,7 +60,7 @@ exports[`Layout component tests matches the Snapshot 1`] = `
             class="mantine-Menu-root mantine-193ey9s"
           >
             <div
-              aria-controls="mantine-epqzz35so"
+              aria-controls="mantine-r8lw2517j"
               aria-expanded="false"
               aria-haspopup="menu"
               class="mantine-Button-light mantine-Button-root mantine-z0i7nx"

@@ -15,8 +15,8 @@ exports[`Home matches the Dorm page Snapshot 1`] = `
           >
             <label
               class="mantine-riils3 mantine-TextInput-label"
-              for="mantine-3rae1kyt5"
-              id="mantine-3rae1kyt5-label"
+              for="mantine-6np6vi7ul"
+              id="mantine-6np6vi7ul-label"
             >
               Search
             </label>
@@ -59,7 +59,7 @@ exports[`Home matches the Dorm page Snapshot 1`] = `
               <input
                 aria-invalid="false"
                 class="mantine-TextInput-defaultVariant mantine-TextInput-input mantine-TextInput-withIcon mantine-riw2j3"
-                id="mantine-3rae1kyt5"
+                id="mantine-6np6vi7ul"
                 placeholder="Search for a home"
                 type="text"
                 value=""
