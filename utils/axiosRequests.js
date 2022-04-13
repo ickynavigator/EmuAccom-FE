@@ -86,3 +86,23 @@ export const fetchSingleDormById = id => {
   const url = `${serverURL}/dorm/${id}`;
   return axios.get(url);
 };
+
+export const verifyToken = token => {
+  // AXIOS INTERCEPTOR
+  axios.interceptors.response.use(
+    response => response,
+    error => {
+      if (error.response.status === 401) {
+        return Promise.resolve(error);
+      }
+      return Promise.reject(error);
+    },
+  );
+  const url = `${serverURL}/users/auth`;
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  return axios.get(url, config);
+};
