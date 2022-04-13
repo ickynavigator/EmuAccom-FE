@@ -5,6 +5,7 @@ import {
   Button,
   Center,
   Container,
+  Divider,
   Grid,
   Image,
   Text,
@@ -23,6 +24,9 @@ export async function getServerSideProps(context) {
 
   return { props: { dorm: { ...res.data } } };
 }
+
+const Dot = () => <Box px={2}>&#xb7;</Box>;
+const PaddedDivider = ({ pad = 25 }) => <Divider my={pad} />;
 
 /**
  * @param {{
@@ -48,10 +52,13 @@ const Index = props => {
                 <Center inline>
                   <Star size={16} />
                   {getRating(dorm.reviews)}
-                  <Box px={2}>&#xb7;</Box>
+                  <Dot />
                   <Text underline>{dorm.reviews.length} reviews</Text>
-                  <Box px={2}>&#xb7;</Box>
-                  <Text underline>{dorm.address.addressLine}</Text>
+                  <Dot />
+                  <Text underline>
+                    {dorm.address.addressLine}, {dorm.address.city},{" "}
+                    {dorm.address.country}
+                  </Text>
                 </Center>
               </Text>
             </Grid.Col>
@@ -81,6 +88,56 @@ const Index = props => {
               <Image key={id} src={url} alt={imgDesc} />
             ))}
           </Carousel>
+
+          <>
+            <br />
+            <Text>{dorm.name}</Text>
+            <br />
+            <Center inline>
+              <Text weight={600}>{dorm.bedroomCount} Bedrooms</Text> <Dot />
+              <Text weight={600}>{dorm.bedCount} Beds</Text> <Dot />
+              <Text weight={600}>{dorm.bathroomCount} Bathrooms</Text> <Dot />
+              <Text weight={600}>{dorm.accomodateCount} Residents</Text>
+            </Center>
+            <PaddedDivider />
+            <Title order={2}>Description</Title>
+            <Text>{dorm.description}</Text>
+            <PaddedDivider />
+            <Title order={2}>What this place offers</Title>
+            AMENITIES TO BE LISTED
+            <PaddedDivider />
+            <Title order={2}>Reviews</Title>
+            <Text>
+              <Center inline>
+                <Star size={24} />
+                <Text size="xl">{getRating(dorm.reviews)}</Text>
+                <Dot />
+                <Text underline size="xl">
+                  {dorm.reviews.length} reviews
+                </Text>
+              </Center>
+            </Text>
+            {dorm.reviews.length > 0 ? (
+              "not done"
+            ) : (
+              <Alert
+                icon={<AlertCircle size={16} />}
+                title="Bummer!"
+                color="yellow"
+                my={10}
+              >
+                No reviews yet
+              </Alert>
+            )}
+            {/* Add reviews */}
+            <PaddedDivider />
+            <Title order={2}>Contact Info</Title>
+            <Text>Fax: {"+905331234567 "}</Text>
+            <Text>Phone: {"+905331234567 "}</Text>
+            <Text>
+              Mail: <a href="mailto:john@doe.com">john@doe.com</a>
+            </Text>
+          </>
         </Container>
       ) : (
         <Center>
