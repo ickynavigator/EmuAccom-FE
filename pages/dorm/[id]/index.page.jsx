@@ -1,6 +1,17 @@
-import { Alert, Center } from "@mantine/core";
-import React from "react";
-import { AlertCircle } from "tabler-icons-react";
+import {
+  Alert,
+  Button,
+  Center,
+  Container,
+  Grid,
+  Image,
+  Text,
+  Title,
+} from "@mantine/core";
+import React, { useState } from "react";
+import { Carousel } from "react-responsive-carousel";
+import { AlertCircle, Share } from "tabler-icons-react";
+import ShareModal from "../../../components/Modals/ShareModal";
 import { fetchSingleDormById } from "../../../utils/axiosRequests";
 
 export async function getServerSideProps(context) {
@@ -12,10 +23,47 @@ export async function getServerSideProps(context) {
 
 const Index = props => {
   const { dorm } = props;
+  const [shareModalOpen, setshareModalOpen] = useState(true);
+  let link = `/dorm/${dorm.id}`;
+  if (typeof window !== "undefined") {
+    link = window.location.href;
+  }
+
   return (
     <div>
       {dorm ? (
-        <>{dorm.name}</>
+        <Container>
+          <Grid justify="space-between" align="center">
+            <Grid.Col span={10}>
+              <Title weight={700}>{dorm.name}</Title>
+            </Grid.Col>
+            <Grid.Col span={2}>
+              <Button
+                compact
+                variant="subtle"
+                radius="lg"
+                onClick={() => setshareModalOpen(true)}
+              >
+                <Text weight={700} size="lg">
+                  Share
+                </Text>
+                <Share size={15} />
+              </Button>
+              <ShareModal
+                opened={shareModalOpen}
+                onClose={() => setshareModalOpen(false)}
+                id={dorm._id}
+                link={link}
+              />
+            </Grid.Col>
+          </Grid>
+          <br />
+          <Carousel showArrows showThumbs={false} showStatus={false}>
+            {dorm.pictures.map(({ _id: id, description: imgDesc, url }) => (
+              <Image key={id} src={url} alt={imgDesc} />
+            ))}
+          </Carousel>
+        </Container>
       ) : (
         <Center>
           <Alert icon={<AlertCircle size={16} />} title="Bummer!" color="red">
