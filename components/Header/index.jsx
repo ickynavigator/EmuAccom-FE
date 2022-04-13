@@ -53,13 +53,21 @@ export const MenuList = ({
       )}
 
       <Menu.Label>Menu</Menu.Label>
-
       <Menu.Item>
         <Anchor href="/dorm">View Dorms</Anchor>
       </Menu.Item>
       <Menu.Item>
         <Anchor href="/home">View Homes</Anchor>
       </Menu.Item>
+
+      <Menu.Label>Hosting</Menu.Label>
+      <Menu.Item>
+        <Anchor href="/dorm/host">Register a dorm</Anchor>
+      </Menu.Item>
+      <Menu.Item>
+        <Anchor href="/home/host">Host a home</Anchor>
+      </Menu.Item>
+
       {isAuthenticated && (
         <>
           <Menu.Label>User</Menu.Label>
