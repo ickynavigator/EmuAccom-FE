@@ -49,7 +49,7 @@
   },
   "lint-staged": {
     "pages/**/*.page.{ts,tsx,js,jsx}": [
-      "yarn run format:page"
+      "yarn run format:base"
     ],
     "*(!.page).{ts,tsx,js,jsx}": [
       "yarn run format:base"
