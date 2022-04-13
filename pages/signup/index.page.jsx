@@ -8,17 +8,24 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useRouter } from "next/router";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { LOGIN_USER } from "../../context/constants";
 import { store } from "../../context/store";
+import { useAuth } from "../../hooks";
 import { signUpRequest } from "../../utils/axiosRequests";
 import regexPatterns from "../../utils/regex-patterns";
 
 const Index = () => {
+  const { isAuthenticated } = useAuth();
   const { dispatch } = useContext(store);
   const router = useRouter();
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  useEffect(() => {
+    if (isAuthenticated) {
+      router.push("/");
+    }
+  });
 
   const formDetails = useForm({
     initialValues: {
