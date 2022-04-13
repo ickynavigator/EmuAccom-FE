@@ -16,3 +16,14 @@
  *           user: User,
  *          }} AppState
  */
+
+/**
+ * This is the type of the review object
+ * @typedef {{
+ *            _id: string,
+ *            name: string,
+ *            rating: number,
+ *            comment: string,
+ *            user: string,
+ *          }} Review
+ */
