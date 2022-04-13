@@ -12,7 +12,7 @@ const useAuth = () => {
     if (user?.token) {
       const verifyTokenWrapper = async () => {
         const res = await verifyToken(user.token);
-        if (res.status === 200 && res.data?.valid) {
+        if (res.status === 200 || res.status === 204 || res.status === 304) {
           setIsAuthenticated(true);
         } else {
           setIsAuthenticated(false);
