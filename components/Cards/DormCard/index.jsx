@@ -7,8 +7,9 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import React from "react";
+import { Carousel } from "react-responsive-carousel";
 
-const Index = ({ _id, name, image, description }) => {
+const Index = ({ _id, name, pictures, description }) => {
   const theme = useMantineTheme();
 
   const secondaryColor =
@@ -18,7 +19,13 @@ const Index = ({ _id, name, image, description }) => {
     <div style={{ width: 340, margin: "auto" }}>
       <Card shadow="sm" p="lg">
         <Card.Section>
-          <Image src={image} height={160} alt={name} />
+          <Carousel showArrows showThumbs={false} showStatus={false}>
+            {pictures?.map(({ _id: id, url }) => (
+              <div key={id}>
+                <Image src={url} height={160} alt={name} />
+              </div>
+            ))}
+          </Carousel>
         </Card.Section>
 
         <Group
@@ -41,7 +48,7 @@ const Index = ({ _id, name, image, description }) => {
           fullWidth
           style={{ marginTop: 14 }}
           component="a"
-          href={`/dorms/${_id}`}
+          href={`/dorm/${_id}`}
         >
           Check out house now
         </Button>
