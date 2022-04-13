@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DormCard component tests matches the Snapshot 1`] = `
+<div>
+  <div
+    style="width: 340px; margin: auto;"
+  >
+    <div
+      class="mantine-Paper-root mantine-Card-root mantine-tz9aok"
+    >
+      <div
+        class="mantine-Card-cardSection mantine-wudk7j"
+      >
+        <div
+          class="mantine-Image-root mantine-15po0m8"
+        >
+          <figure
+            class="mantine-11nhzn5 mantine-Image-figure"
+          >
+            <div
+              class="mantine-qqmv3w mantine-Image-imageWrapper"
+            >
+              <img
+                class="mantine-19xxpso mantine-Image-image"
+                style="object-fit: cover; width: 100%; height: 160px;"
+              />
+            </div>
+          </figure>
+        </div>
+      </div>
+      <div
+        class="mantine-Group-root mantine-19jxmdp"
+        style="margin-bottom: 5px; margin-top: 12px;"
+      >
+        <div
+          class="mantine-Text-root mantine-Group-child mantine-125basi"
+        />
+      </div>
+      <div
+        class="mantine-Text-root mantine-1nlnfit"
+        style="color: rgb(73, 80, 87); line-height: 1.5;"
+      />
+      <a
+        class="mantine-Button-light mantine-Button-root mantine-15godsx"
+        href="/dorms/undefined"
+        style="margin-top: 14px;"
+        type="button"
+      >
+        <div
+          class="mantine-3xbgk5 mantine-Button-inner"
+        >
+          <span
+            class="mantine-qo1k2 mantine-Button-label"
+          >
+            Check out house now
+          </span>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+`;
