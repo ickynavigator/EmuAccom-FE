@@ -1,5 +1,6 @@
 import { ColorSchemeProvider, MantineProvider } from "@mantine/core";
 import React, { useState } from "react";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Layout from "../components/Layout";
 import MetaHeader from "../components/MetaHeader";
 import theme from "../config/mantine.config";
