@@ -81,3 +81,8 @@ export const fetchDorms = ({
   ]);
   return axios.get(`${serverURL}/dorm${parsedParams}`);
 };
+
+export const fetchSingleDormById = id => {
+  const url = `${serverURL}/dorm/${id}`;
+  return axios.get(url);
+};
