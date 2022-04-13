@@ -20,9 +20,9 @@ const Index = ({ _id, name, pictures, description }) => {
       <Card shadow="sm" p="lg">
         <Card.Section>
           <Carousel showArrows showThumbs={false} showStatus={false}>
-            {pictures?.map(({ _id: id, url }) => (
+            {pictures?.map(({ _id: id, url, description: imgDesc }) => (
               <div key={id}>
-                <Image src={url} height={160} alt={name} />
+                <Image src={url} height={160} alt={imgDesc} />
               </div>
             ))}
           </Carousel>
