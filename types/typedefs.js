@@ -27,3 +27,34 @@
  *            user: string,
  *          }} Review
  */
+
+/**
+ * This is the type of the address object
+ *  @typedef {{
+ *      addressLine: string,
+ *      city: string,
+ *      postalCode: string,
+ *      country: string,
+ *  }} Address
+ */
+
+/**
+ *  This is the type of the Dorm object
+ *  @typedef {{
+ *      name: string,
+ *      description: string,
+ *      address: Address,
+ *      bedroomCount: number,
+ *      bedCount: number,
+ *      bathroomCount: number,
+ *      accomodateCount: number,
+ *      availabilityCount: number,
+ *      pricePerSemester: number,
+ *      pricePerNight?: number,
+ *      pictures: { url: string, description?: string }[],
+ *      keywords: { tag: string }[],
+ *      reviews: Review[],
+ *      approved: boolean,
+ *      management: string,
+ *  }} Dormitory
+ */

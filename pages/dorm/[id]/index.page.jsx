@@ -1,3 +1,4 @@
+/// <reference path="../../../types/typedefs.js" />
 import {
   Alert,
   Box,
@@ -23,6 +24,11 @@ export async function getServerSideProps(context) {
   return { props: { dorm: { ...res.data } } };
 }
 
+/**
+ * @param {{
+ *  dorm: Dormitory
+ * }} props
+ */
 const Index = props => {
   const { dorm } = props;
   const [shareModalOpen, setshareModalOpen] = useState(false);
