@@ -38,8 +38,10 @@ const Index = () => {
     },
 
     validate: {
-      fName: value => (regexPatterns.name.test(value) ? null : "Invalid email"),
-      lName: value => (regexPatterns.name.test(value) ? null : "Invalid email"),
+      fName: value =>
+        regexPatterns.name.test(value) ? null : "Invalid first name",
+      lName: value =>
+        regexPatterns.name.test(value) ? null : "Invalid last name",
       email: value =>
         regexPatterns.email.test(value) ? null : "Invalid email",
       password: value =>
