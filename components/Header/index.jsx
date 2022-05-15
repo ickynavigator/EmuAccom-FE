@@ -41,37 +41,35 @@ export const MenuList = ({
     >
       {!isAuthenticated && (
         <>
-          <Menu.Item>
-            <Anchor href="/signup" style={{ fontWeight: "bold" }}>
-              Sign Up
-            </Anchor>
-          </Menu.Item>
-          <Menu.Item>
-            <Anchor href="/login">Login</Anchor>
-          </Menu.Item>
+          <Anchor href="/signup" style={{ fontWeight: "bold" }}>
+            <Menu.Item>Sign Up</Menu.Item>
+          </Anchor>
+          <Anchor href="/login">
+            <Menu.Item>Login</Menu.Item>
+          </Anchor>
         </>
       )}
 
       <Menu.Label>Menu</Menu.Label>
-      <Menu.Item>
-        <Anchor href="/dorm">View Dorms</Anchor>
-      </Menu.Item>
-      <Menu.Item>
-        <Anchor href="/home">View Homes</Anchor>
-      </Menu.Item>
+      <Anchor href="/dorm">
+        <Menu.Item>View Dorms</Menu.Item>
+      </Anchor>
+      <Anchor href="/home">
+        <Menu.Item>View Homes</Menu.Item>
+      </Anchor>
 
       <Menu.Label>Hosting</Menu.Label>
-      <Menu.Item>
-        <Anchor href="/host">Register a dorm or home</Anchor>
-      </Menu.Item>
+      <Anchor href="/host">
+        <Menu.Item>Register a dorm or home</Menu.Item>
+      </Anchor>
 
       {isAuthenticated && (
         <>
           <Menu.Label>User</Menu.Label>
 
-          <Menu.Item>
-            <Anchor href="/profile">Profile</Anchor>
-          </Menu.Item>
+          <Anchor href="/profile">
+            <Menu.Item>Profile</Menu.Item>
+          </Anchor>
           <Menu.Item onClick={LogoutHandler}>Logout</Menu.Item>
         </>
       )}
