@@ -5,6 +5,7 @@ import {
   Button,
   Group,
   Header,
+  Image,
   Menu,
   Text,
   useMantineColorScheme,
@@ -86,7 +87,13 @@ export const Index = () => {
     <Header py={30}>
       <Group sx={{ height: "100%" }} px={20} position="apart">
         <Anchor href="/">
-          <Text>EmuAccom</Text>
+          <Image
+            src="./EmuAccomLogo-Hero.png"
+            width={200}
+            height={23}
+            alt="Site Header"
+            placeholder={<Text>EmuAccom</Text>}
+          />
         </Anchor>
 
         <Group>
