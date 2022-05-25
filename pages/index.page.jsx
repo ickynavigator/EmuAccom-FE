@@ -79,13 +79,13 @@ const Index = () => {
         breakpoints={[{ maxWidth: 755, cols: 1, spacing: "sm" }]}
       >
         <GridCard
-          imgSrc="./dorm.jpeg"
+          imgSrc="/dorm.jpeg"
           imgAlt="Dormitory"
           url="./dorm"
           text="View all dorms"
         />
         <GridCard
-          imgSrc="./apartment.jpeg"
+          imgSrc="/apartment.jpeg"
           imgAlt="Apartment"
           url="./home"
           text="View all homes"

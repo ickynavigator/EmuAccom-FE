@@ -88,7 +88,7 @@ export const Index = () => {
       <Group sx={{ height: "100%" }} px={20} position="apart">
         <Anchor href="/">
           <Image
-            src="./EmuAccomLogo-Hero.png"
+            src="/EmuAccomLogo-Hero.png"
             width={200}
             height={23}
             alt="Site Header"
