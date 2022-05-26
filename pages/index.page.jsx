@@ -19,7 +19,13 @@ const GridCard = props => {
     <Center>
       <Card withBorder style={{ width: 300 }} className="scale-on-hover">
         <Card.Section>
-          <Image src={imgSrc} height={200} alt={imgAlt} />
+          <Image
+            src={imgSrc}
+            height={200}
+            alt={imgAlt}
+            withPlaceholder
+            placeholder={<Text align="center">{imgAlt}</Text>}
+          />
         </Card.Section>
 
         <Anchor href={url} underline={false}>

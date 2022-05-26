@@ -85,7 +85,13 @@ const Index = props => {
           <br />
           <Carousel showArrows showThumbs={false} showStatus={false}>
             {house.pictures.map(({ _id: id, description: imgDesc, url }) => (
-              <Image key={id} src={url} alt={imgDesc} />
+              <Image
+                key={id}
+                src={url}
+                alt={imgDesc}
+                withPlaceholder
+                placeholder={<Text align="center">{imgDesc}</Text>}
+              />
             ))}
           </Carousel>
 

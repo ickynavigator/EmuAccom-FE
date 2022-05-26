@@ -22,7 +22,13 @@ const Index = ({ _id, name, pictures, description }) => {
           <Carousel showArrows showThumbs={false} showStatus={false}>
             {pictures?.map(({ _id: id, url, description: imgDesc }) => (
               <div key={id}>
-                <Image src={url} height={160} alt={imgDesc} />
+                <Image
+                  src={url}
+                  height={160}
+                  alt={imgDesc}
+                  withPlaceholder
+                  placeholder={<Text align="center">{imgDesc}</Text>}
+                />
               </div>
             ))}
           </Carousel>

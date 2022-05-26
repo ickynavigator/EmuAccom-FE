@@ -112,7 +112,7 @@ const Index = props => {
           </Center>
         </>
       ) : (
-        <Center>
+        <Center py="md">
           <Alert icon={<AlertCircle size={16} />} title="Bummer!" color="red">
             Sorry but no Dorm has been found.
             <Space />
