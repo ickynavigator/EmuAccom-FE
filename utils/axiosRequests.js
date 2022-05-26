@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const serverBase = environment => {
+/** REQUEST HELPERS */
+export const serverBase = (environment = "development") => {
   switch (environment) {
     case "production":
       return "https://emuaccom-be-production.up.railway.app";
@@ -21,7 +22,6 @@ export const axiosResolvers = {
     return Promise.reject(error);
   },
 };
-
 export const paramParser = params => {
   let paramString = "?";
   for (let i = 0; i < params.length; i += 1) {
@@ -32,6 +32,7 @@ export const paramParser = params => {
   return paramString;
 };
 
+/** REQUESTS */
 export const signInRequest = data => {
   // AXIOS INTERCEPTOR
   axios.interceptors.response.use(
@@ -82,6 +83,23 @@ export const fetchDorms = ({
     { key: "paginate", val: paginate },
   ]);
   return axios.get(`${serverURL}/dorm${parsedParams}`);
+};
+
+export const fetchHomes = ({
+  searchParam = "",
+  search = "",
+  pageSize = 10,
+  pageNumber = 1,
+  paginate = true,
+}) => {
+  const parsedParams = paramParser([
+    { key: "param", val: searchParam },
+    { key: "keyword", val: search },
+    { key: "pageSize", val: pageSize },
+    { key: "pageNumber", val: pageNumber },
+    { key: "paginate", val: paginate },
+  ]);
+  return axios.get(`${serverURL}/house${parsedParams}`);
 };
 
 export const fetchSingleDormById = id => {
