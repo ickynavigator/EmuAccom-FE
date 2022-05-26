@@ -4,7 +4,10 @@ import axios from "axios";
 export const serverBase = (environment = "development") => {
   switch (environment) {
     case "production":
-      return "https://emuaccom-be-production.up.railway.app";
+      return (
+        process.env.NEXT_PUBLIC_SERVER_URL ??
+        "https://emuaccom-be.herokuapp.com/"
+      );
     case "development":
     default:
       return process.env.NEXT_PUBLIC_SERVER_URL;
