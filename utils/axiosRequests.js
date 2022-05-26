@@ -107,6 +107,11 @@ export const fetchSingleDormById = id => {
   return axios.get(url);
 };
 
+export const fetchSingleHouseById = id => {
+  const url = `${serverURL}/house/${id}`;
+  return axios.get(url);
+};
+
 export const verifyToken = token => {
   // AXIOS INTERCEPTOR
   axios.interceptors.response.use(
