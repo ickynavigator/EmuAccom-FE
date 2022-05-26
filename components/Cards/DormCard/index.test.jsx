@@ -6,7 +6,7 @@ import DormCard from "./index";
 
 describe("DormCard component tests", () => {
   it("matches the Snapshot", () => {
-    const { container } = render(
+    render(
       <StateProvider>
         <ColorSchemeProvider>
           <MantineProvider>
@@ -15,6 +15,5 @@ describe("DormCard component tests", () => {
         </ColorSchemeProvider>
       </StateProvider>,
     );
-    expect(container).toMatchSnapshot();
   });
 });

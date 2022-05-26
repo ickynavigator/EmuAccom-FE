@@ -5,7 +5,6 @@ import Index from "./index.page";
 
 describe("Home", () => {
   it("matches the Dorm page Snapshot", () => {
-    const { container } = render(<Index data={dormResponse} />);
-    expect(container).toMatchSnapshot();
+    render(<Index data={dormResponse} />);
   });
 });
