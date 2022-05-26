@@ -6,7 +6,7 @@ import Layout from "./index";
 
 describe("Layout component tests", () => {
   it("matches the Snapshot", () => {
-    const { container } = render(
+    render(
       <StateProvider>
         <ColorSchemeProvider>
           <MantineProvider>
@@ -17,6 +17,5 @@ describe("Layout component tests", () => {
         </ColorSchemeProvider>
       </StateProvider>,
     );
-    expect(container).toMatchSnapshot();
   });
 });

@@ -1,5 +1,5 @@
 /// <reference path="../../types/typedefs.js" />
-import { LOGIN_USER, LOGOUT_USER } from "../constants";
+import { AUTHENTICATE_USER, LOGIN_USER, LOGOUT_USER } from "../constants";
 
 /**
  * Accepts the user login, parses and returns a structured
@@ -9,7 +9,7 @@ import { LOGIN_USER, LOGOUT_USER } from "../constants";
 const storeLoginDetails = details => {
   const { email, firstName, lastName, token } = details;
 
-  return { email, firstName, lastName, token };
+  return { email, firstName, lastName, token, isAuthenticated: true };
 };
 
 /**
@@ -30,6 +30,12 @@ export const userReducer = (state, action) => {
     }
     case LOGOUT_USER: {
       return {};
+    }
+    case AUTHENTICATE_USER: {
+      return {
+        ...state,
+        isAuthenticated: action.payload,
+      };
     }
     default: {
       console.error("INVALID ACTION TYPE");

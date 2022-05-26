@@ -7,6 +7,7 @@
  *            firstName: string,
  *            lastName: string,
  *            token: string
+ *            isAuthenticated?: boolean
  *          }} User
  */
 

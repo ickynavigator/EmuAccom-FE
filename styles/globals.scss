@@ -1,0 +1,9 @@
+.scale-on-hover {
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    @media (min-width: 767px) {
+      transform: scale(1.2);
+    }
+  }
+}
