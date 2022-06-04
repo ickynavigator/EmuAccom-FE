@@ -20,7 +20,13 @@ const GridCard = props => {
     <Center>
       <Card withBorder style={{ width: 300 }} className="scale-on-hover">
         <Card.Section>
-          <Image src={imgSrc} height={200} alt={imgAlt} />
+          <Image
+            src={imgSrc}
+            height={200}
+            alt={imgAlt}
+            withPlaceholder
+            placeholder={<Text align="center">{imgAlt}</Text>}
+          />
         </Card.Section>
 
         <Anchor href={url} underline={false}>
@@ -82,13 +88,13 @@ const Index = () => {
         breakpoints={[{ maxWidth: 755, cols: 1, spacing: "sm" }]}
       >
         <GridCard
-          imgSrc="./dorm.jpeg"
+          imgSrc="/dorm.jpeg"
           imgAlt="Dormitory"
           url="./dorm"
           text="View all dorms"
         />
         <GridCard
-          imgSrc="./apartment.jpeg"
+          imgSrc="/apartment.jpeg"
           imgAlt="Apartment"
           url="./home"
           text="View all homes"

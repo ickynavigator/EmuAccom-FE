@@ -1,16 +1,16 @@
 import { ColorSchemeProvider, MantineProvider } from "@mantine/core";
 import { render } from "@testing-library/react";
 import React from "react";
-import { StateProvider } from "../../context/store";
-import Header from "./index";
+import { StateProvider } from "../../../context/store";
+import HouseCard from "./index";
 
-describe("Header component tests", () => {
+describe("DormCard component tests", () => {
   it("matches the Snapshot", () => {
     render(
       <StateProvider>
         <ColorSchemeProvider>
           <MantineProvider>
-            <Header />
+            <HouseCard />
           </MantineProvider>
         </ColorSchemeProvider>
       </StateProvider>,

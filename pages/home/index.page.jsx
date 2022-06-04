@@ -11,12 +11,12 @@ import { useForm } from "@mantine/form";
 import { useRouter } from "next/router";
 import React from "react";
 import { AlertCircle, Search } from "tabler-icons-react";
-import DormCard from "../../components/Cards/DormCard";
-import { fetchDorms } from "../../utils/axiosRequests";
+import HouseCard from "../../components/Cards";
+import { fetchHomes } from "../../utils/axiosRequests";
 
 const pageSize = 9;
 export async function getServerSideProps(context) {
-  const res = await fetchDorms({
+  const res = await fetchHomes({
     search: context.query.s,
     pageNumber: context.query.p,
     pageSize,
@@ -33,7 +33,7 @@ export async function getServerSideProps(context) {
 
 const Index = props => {
   const { data } = props;
-  const { dorms, page, pages } = data;
+  const { houses, page, pages } = data;
 
   const router = useRouter();
   const currentSearch = router?.query?.s;
@@ -63,7 +63,7 @@ const Index = props => {
     }
 
     router.push({
-      pathname: "/dorm",
+      pathname: "/home",
       query: queries,
     });
   };
@@ -85,20 +85,20 @@ const Index = props => {
               label="Search"
               radius="xl"
               size="md"
-              placeholder="Search for a home"
+              placeholder="Search for a dorm"
               {...form.getInputProps("search")}
             />
           </Group>
         </form>
       </Container>
 
-      {dorms && dorms.length > 0 ? (
+      {houses && houses.length > 0 ? (
         <>
           <Center size="xl" py="md" spacing="xs">
             <Group>
-              {dorms.map(dorm => {
-                const { _id: id } = dorm;
-                return <DormCard key={id} {...dorm} />;
+              {houses.map(house => {
+                const { _id: id } = house;
+                return <HouseCard key={id} {...house} />;
               })}
             </Group>
           </Center>
@@ -114,7 +114,7 @@ const Index = props => {
       ) : (
         <Center py="md">
           <Alert icon={<AlertCircle size={16} />} title="Bummer!" color="red">
-            Sorry but no Dorm has been found.
+            Sorry but no house has been found.
             <Space />
             Please try different parameters
           </Alert>

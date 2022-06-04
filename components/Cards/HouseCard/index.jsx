@@ -58,7 +58,7 @@ const Index = ({ _id, name, pictures, description }) => {
           fullWidth
           style={{ marginTop: 14 }}
           component="a"
-          href={`/dorm/${_id}`}
+          href={`/home/${_id}`}
         >
           Check out house now
         </Button>

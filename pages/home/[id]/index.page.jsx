@@ -15,14 +15,14 @@ import React, { useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 import { AlertCircle, Share, Star } from "tabler-icons-react";
 import ShareModal from "../../../components/Modals/ShareModal";
-import { fetchSingleDormById } from "../../../utils/axiosRequests";
+import { fetchSingleHouseById } from "../../../utils/axiosRequests";
 import { getRating } from "../../../utils/reviewHelpers";
 
 export async function getServerSideProps(context) {
   const { id } = context.query;
-  const res = await fetchSingleDormById(id);
+  const res = await fetchSingleHouseById(id);
 
-  return { props: { dorm: { ...res.data } } };
+  return { props: { house: { ...res.data } } };
 }
 
 const Dot = () => <Box px={2}>&#xb7;</Box>;
@@ -30,34 +30,34 @@ const PaddedDivider = ({ pad = 25 }) => <Divider my={pad} />;
 
 /**
  * @param {{
- *  dorm: Dormitory
+ *  house: Dormitory
  * }} props
  */
 const Index = props => {
-  const { dorm } = props;
+  const { house } = props;
   const [shareModalOpen, setshareModalOpen] = useState(false);
-  let link = `/dorm/${dorm.id}`;
+  let link = `/house/${house.id}`;
   if (typeof window !== "undefined") {
     link = window.location.href;
   }
 
   return (
     <div>
-      {dorm ? (
+      {house ? (
         <Container>
           <Grid justify="space-between" align="center">
             <Grid.Col span={10}>
-              <Title weight={700}>{dorm.name}</Title>
+              <Title weight={700}>{house.name}</Title>
               <Text>
                 <Center inline>
                   <Star size={16} />
-                  {getRating(dorm.reviews)}
+                  {getRating(house.reviews)}
                   <Dot />
-                  <Text underline>{dorm.reviews.length} reviews</Text>
+                  <Text underline>{house.reviews.length} reviews</Text>
                   <Dot />
                   <Text underline>
-                    {dorm.address.addressLine}, {dorm.address.city},{" "}
-                    {dorm.address.country}
+                    {house.address.addressLine}, {house.address.city},{" "}
+                    {house.address.country}
                   </Text>
                 </Center>
               </Text>
@@ -77,14 +77,14 @@ const Index = props => {
               <ShareModal
                 opened={shareModalOpen}
                 onClose={() => setshareModalOpen(false)}
-                id={dorm._id}
+                id={house._id}
                 link={link}
               />
             </Grid.Col>
           </Grid>
           <br />
           <Carousel showArrows showThumbs={false} showStatus={false}>
-            {dorm.pictures.map(({ _id: id, description: imgDesc, url }) => (
+            {house.pictures.map(({ _id: id, description: imgDesc, url }) => (
               <Image
                 key={id}
                 src={url}
@@ -97,17 +97,17 @@ const Index = props => {
 
           <>
             <br />
-            <Text>{dorm.name}</Text>
+            <Text>{house.name}</Text>
             <br />
             <Center inline>
-              <Text weight={600}>{dorm.bedroomCount} Bedrooms</Text> <Dot />
-              <Text weight={600}>{dorm.bedCount} Beds</Text> <Dot />
-              <Text weight={600}>{dorm.bathroomCount} Bathrooms</Text> <Dot />
-              <Text weight={600}>{dorm.accomodateCount} Residents</Text>
+              <Text weight={600}>{house.bedroomCount} Bedrooms</Text> <Dot />
+              <Text weight={600}>{house.bedCount} Beds</Text> <Dot />
+              <Text weight={600}>{house.bathroomCount} Bathrooms</Text> <Dot />
+              <Text weight={600}>{house.accomodateCount} Residents</Text>
             </Center>
             <PaddedDivider />
             <Title order={2}>Description</Title>
-            <Text>{dorm.description}</Text>
+            <Text>{house.description}</Text>
             <PaddedDivider />
             <Title order={2}>What this place offers</Title>
             AMENITIES TO BE LISTED
@@ -116,14 +116,14 @@ const Index = props => {
             <Text>
               <Center inline>
                 <Star size={24} />
-                <Text size="xl">{getRating(dorm.reviews)}</Text>
+                <Text size="xl">{getRating(house.reviews)}</Text>
                 <Dot />
                 <Text underline size="xl">
-                  {dorm.reviews.length} reviews
+                  {house.reviews.length} reviews
                 </Text>
               </Center>
             </Text>
-            {dorm.reviews.length > 0 ? (
+            {house.reviews.length > 0 ? (
               "not done"
             ) : (
               <Alert
