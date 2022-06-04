@@ -13,19 +13,21 @@ const WithManager = Component => {
     const [isManager, setIsManager] = useState(false);
 
     const verifyManager = useCallback(async () => {
-      if (state.manager.token) {
-        if (state.manager.isAuthenticated) {
-          setIsManager(true);
-          setIsLoading(false);
-          return;
-        }
+      if (state.manager) {
+        if (state.manager.token) {
+          if (state.manager.isAuthenticated) {
+            setIsManager(true);
+            setIsLoading(false);
+            return;
+          }
 
-        const res = await verifyMangerToken(state.manager.token);
-        if (res.status === 200 || res.status === 204 || res.status === 304) {
-          dispatch({ type: AUTHENTICATE_MANAGER, payload: true });
-          setIsManager(true);
-          setIsLoading(false);
-          return;
+          const res = await verifyMangerToken(state.manager.token);
+          if (res.status === 200 || res.status === 204 || res.status === 304) {
+            dispatch({ type: AUTHENTICATE_MANAGER, payload: true });
+            setIsManager(true);
+            setIsLoading(false);
+            return;
+          }
         }
       }
 
