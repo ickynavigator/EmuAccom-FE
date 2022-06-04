@@ -15,7 +15,7 @@ import { STORE_MANAGER } from "../../context/constants";
 import { store } from "../../context/store";
 import WithAuthenticated from "../../HOC/withAuthenticated";
 import { signUpManagerRequest } from "../../utils/axiosRequests";
-import regexPatterns from "../../utils/regex-patterns";
+import { regexPatterns } from "../../utils/stringTools";
 
 const Index = () => {
   const { dispatch } = useContext(store);

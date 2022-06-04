@@ -6,7 +6,7 @@ import { LOGIN_USER } from "../../context/constants";
 import { store } from "../../context/store";
 import { useAuth } from "../../hooks";
 import { signInRequest } from "../../utils/axiosRequests";
-import regexPatterns from "../../utils/regex-patterns";
+import { regexPatterns } from "../../utils/stringTools";
 
 const Index = () => {
   const { isAuthenticated } = useAuth();
