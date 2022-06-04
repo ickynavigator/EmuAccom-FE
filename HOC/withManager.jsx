@@ -1,3 +1,4 @@
+import { Loader } from "@mantine/core";
 import { useRouter } from "next/router";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { AUTHENTICATE_MANAGER } from "../context/constants";
@@ -41,7 +42,7 @@ const WithManager = Component => {
       verifyManager();
     }, [verifyManager]);
 
-    return isLoading ? <>loading...</> : isManager && <Component />;
+    return isLoading ? <Loader size="xl" /> : isManager && <Component />;
   };
 
   return ManagerOnlyComponent;

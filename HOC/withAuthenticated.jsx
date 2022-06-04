@@ -1,3 +1,4 @@
+import { Loader } from "@mantine/core";
 import { useRouter } from "next/router";
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { AUTHENTICATE_USER } from "../context/constants";
@@ -40,7 +41,7 @@ const WithAuthenticated = Component => {
       verifyTokenWrapper();
     }, [verifyTokenWrapper]);
 
-    return isLoading ? <>loading...</> : isAuthenticated && <Component />;
+    return isLoading ? <Loader size="xl" /> : isAuthenticated && <Component />;
   };
 
   return AuthenticatedComponent;
