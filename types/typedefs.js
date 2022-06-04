@@ -15,6 +15,7 @@
  * This is the type of the state object
  * @typedef {{
  *           user: User,
+ *           manager: Manager
  *          }} AppState
  */
 
@@ -58,4 +59,16 @@
  *      approved: boolean,
  *      management: string,
  *  }} Dormitory
+ */
+
+/**
+ *  This is the type of the Manager object
+ *  @typedef {{
+ *      businessName: string,
+ *      managerFirstName: string,
+ *      managerLastName: string,
+ *      managerEmail: string,
+ *      managerDescription: string,
+ *      type: string,
+ *  }} Manager
  */
