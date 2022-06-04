@@ -1,4 +1,5 @@
 import axios from "axios";
+import { isBlankOrUndefined } from "./stringTools";
 
 /** REQUEST HELPERS */
 export const serverBase = (environment = "development") => {
@@ -25,14 +26,18 @@ export const axiosResolvers = {
     return Promise.reject(error);
   },
 };
+/**
+ * @param {{key: string, val: string | number | boolean }[]} params
+ * @returns {string}
+ */
 export const paramParser = params => {
   let paramString = "?";
-  for (let i = 0; i < params.length; i += 1) {
-    if (params[i].val.length > 1)
-      paramString += `${params[i].key}=${params[i].val}&`;
-  }
+  params.forEach(({ key, val }) => {
+    if (isBlankOrUndefined(val)) return;
 
-  return paramString;
+    paramString += `${key}=${val}&`;
+  });
+  return paramString.slice(0, -1);
 };
 
 /** REQUESTS */
