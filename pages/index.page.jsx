@@ -10,11 +10,12 @@ import {
   Text,
   Title,
 } from "@mantine/core";
-import React from "react";
+import React, { useState } from "react";
 import { Heart, Home, User } from "tabler-icons-react";
 
 const GridCard = props => {
   const { imgSrc, imgAlt, url, text } = props;
+  const [loading, setLoading] = useState(false);
   return (
     <Center>
       <Card withBorder style={{ width: 300 }} className="scale-on-hover">
@@ -24,6 +25,8 @@ const GridCard = props => {
 
         <Anchor href={url} underline={false}>
           <Button
+            disabled={loading}
+            onClick={() => setLoading(true)}
             variant="light"
             color="blue"
             fullWidth
