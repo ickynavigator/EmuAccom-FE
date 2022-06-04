@@ -4,6 +4,7 @@ import {
   Container,
   Group,
   Pagination,
+  SimpleGrid,
   Space,
   TextInput,
 } from "@mantine/core";
@@ -44,8 +45,7 @@ const Index = props => {
     },
 
     validate: {
-      search: value =>
-        value.length < 2 ? "Name must have at least 2 letters" : null,
+      // search: value => value.length < 2 ? "Name must have at least 2 letters" : null,
     },
   });
 
@@ -95,12 +95,19 @@ const Index = props => {
       {dorms && dorms.length > 0 ? (
         <>
           <Center size="xl" py="md" spacing="xs">
-            <Group>
+            <SimpleGrid
+              cols={3}
+              spacing="lg"
+              breakpoints={[
+                { maxWidth: 980, cols: 2, spacing: "md" },
+                { maxWidth: 700, cols: 1, spacing: "sm" },
+              ]}
+            >
               {dorms.map(dorm => {
                 const { _id: id } = dorm;
                 return <DormCard key={id} {...dorm} />;
               })}
-            </Group>
+            </SimpleGrid>
           </Center>
           <Center>
             <Pagination
