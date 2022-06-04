@@ -25,6 +25,12 @@ export const axiosResolvers = {
     }
     return Promise.reject(error);
   },
+  401: error => {
+    if (error.response.status === 401) {
+      return Promise.resolve(error);
+    }
+    return Promise.reject(error);
+  },
 };
 /**
  * @param {{key: string, val: string | number | boolean }[]} params
@@ -43,16 +49,7 @@ export const paramParser = params => {
 /** REQUESTS */
 export const signInRequest = data => {
   // AXIOS INTERCEPTOR
-  axios.interceptors.response.use(
-    response => response,
-    error => {
-      if (error.response.status === 401) {
-        return Promise.resolve(error);
-      }
-      return Promise.reject(error);
-    },
-  );
-
+  axios.interceptors.response.use(response => response, axiosResolvers["401"]);
   const postData = {
     email: data.email,
     password: data.password,
@@ -141,7 +138,6 @@ export const signUpManagerRequest = data => {
     response => response,
     axiosResolvers["400-401"],
   );
-
   const postData = {
     email: data.email,
     password: data.password,
@@ -149,5 +145,5 @@ export const signUpManagerRequest = data => {
     lastName: data.fName,
     type: data.type,
   };
-  return axios.post(`${serverURL}/users/manager`, postData);
+  return axios.post(`${serverURL}/manager`, postData);
 };
