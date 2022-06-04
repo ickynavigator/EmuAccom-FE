@@ -76,14 +76,14 @@ export const fetchDorms = ({
   search = "",
   pageSize = 10,
   pageNumber = 1,
-  paginate = true,
+  noPaginate = false,
 }) => {
   const parsedParams = paramParser([
     { key: "param", val: searchParam },
     { key: "keyword", val: search },
     { key: "pageSize", val: pageSize },
     { key: "pageNumber", val: pageNumber },
-    { key: "paginate", val: paginate },
+    { key: "noPaginate", val: noPaginate },
   ]);
   return axios.get(`${serverURL}/dorm${parsedParams}`);
 };
@@ -93,14 +93,14 @@ export const fetchHomes = ({
   search = "",
   pageSize = 10,
   pageNumber = 1,
-  paginate = true,
+  noPaginate = false,
 }) => {
   const parsedParams = paramParser([
     { key: "param", val: searchParam },
     { key: "keyword", val: search },
     { key: "pageSize", val: pageSize },
     { key: "pageNumber", val: pageNumber },
-    { key: "paginate", val: paginate },
+    { key: "noPaginate", val: noPaginate },
   ]);
   return axios.get(`${serverURL}/house${parsedParams}`);
 };
