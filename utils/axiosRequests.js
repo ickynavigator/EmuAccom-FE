@@ -147,3 +147,28 @@ export const signUpManagerRequest = data => {
   };
   return axios.post(`${serverURL}/manager`, postData);
 };
+
+export const signInManagerRequest = data => {
+  // AXIOS INTERCEPTOR
+  axios.interceptors.response.use(response => response, axiosResolvers["401"]);
+  const postData = {
+    email: data.email,
+    password: data.password,
+  };
+  return axios.post(`${serverURL}/manager/login`, postData);
+};
+
+export const verifyMangerToken = token => {
+  // AXIOS INTERCEPTOR
+  axios.interceptors.response.use(
+    response => response,
+    axiosResolvers["400-401"],
+  );
+  const url = `${serverURL}/manager/auth`;
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  return axios.get(url, config);
+};
