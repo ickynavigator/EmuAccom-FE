@@ -2,6 +2,10 @@
 import { useLocalStorage } from "@mantine/hooks";
 import React, { createContext, useEffect, useReducer } from "react";
 import combineReducers from "react-combine-reducers";
+import {
+  initialState as managerState,
+  managerReducer,
+} from "./manager/reducer";
 import { initialState as userState, userReducer } from "./user/reducer";
 
 /**
@@ -14,6 +18,7 @@ const { Provider } = store;
 const StateProvider = ({ children }) => {
   const [reducer, initialState] = combineReducers({
     user: [userReducer, userState],
+    manager: [managerReducer, managerState],
   });
 
   // Fetches the state from the browser local storage
