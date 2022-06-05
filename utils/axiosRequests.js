@@ -139,10 +139,12 @@ export const signUpManagerRequest = data => {
     axiosResolvers["400-401"],
   );
   const postData = {
-    email: data.email,
+    businessName: data.businessName,
+    managerFirstName: data.managerFirstName,
+    managerLastName: data.managerLastName,
+    managerEmail: data.managerEmail,
+    managerDescription: data.managerDescription,
     password: data.password,
-    firstName: data.fName,
-    lastName: data.fName,
     type: data.type,
   };
   return axios.post(`${serverURL}/manager`, postData);
@@ -152,7 +154,7 @@ export const signInManagerRequest = data => {
   // AXIOS INTERCEPTOR
   axios.interceptors.response.use(response => response, axiosResolvers["401"]);
   const postData = {
-    email: data.email,
+    managerEmail: data.email,
     password: data.password,
   };
   return axios.post(`${serverURL}/manager/login`, postData);
