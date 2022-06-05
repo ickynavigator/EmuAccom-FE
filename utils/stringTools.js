@@ -1,6 +1,7 @@
 /* eslint-disable no-useless-escape */
 
 export const regexPatterns = {
+  text: /^[a-zA-Z0-9\s]*$/,
   email: /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,5})$/,
   name: /^[A-Za-z-]{1,64}$/,
   password: /^[A-Za-z0-9!@#$%^&*()_.]{4,64}$/,
