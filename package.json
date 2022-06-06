@@ -19,33 +19,36 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@mantine/core": "^4.0.7",
-    "@mantine/form": "^4.0.7",
-    "@mantine/hooks": "^4.0.7",
-    "@mantine/next": "^4.0.7",
+    "@mantine/core": "^4.2.8",
+    "@mantine/dropzone": "^4.2.7",
+    "@mantine/form": "^4.2.8",
+    "@mantine/hooks": "^4.2.8",
+    "@mantine/next": "^4.2.8",
+    "@mantine/notifications": "^4.2.7",
+    "@mantine/styles": "^4.2.8",
     "axios": "^0.26.1",
-    "next": "12.0.10",
+    "next": "12.1.6",
     "react": "17.0.2",
     "react-combine-reducers": "^1.1.1",
     "react-dom": "17.0.2",
     "react-responsive-carousel": "^3.2.23",
-    "tabler-icons-react": "^1.42.0"
+    "tabler-icons-react": "^1.48.1"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^12.1.4",
-    "eslint": "8.8.0",
+    "eslint": "8.17.0",
     "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-next": "12.0.10",
+    "eslint-config-next": "12.1.6",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": ">=6",
     "jest": "^27.5.1",
     "lint-staged": ">=10",
-    "prettier": "^2.5.1",
-    "sass": "^1.49.9"
+    "prettier": "^2.6.2",
+    "sass": "^1.52.2"
   },
   "lint-staged": {
     "pages/**/*.page.{ts,tsx,js,jsx}": [
