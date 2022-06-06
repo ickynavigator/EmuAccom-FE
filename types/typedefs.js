@@ -72,3 +72,9 @@
  *      type: string,
  *  }} Manager
  */
+
+/**
+ * @typedef {( "file-invalid-type" | "file-too-large" | "file-too-small" | "too-many-files" )} ErrorCode
+ * @typedef {{ message: string, code: ErrorCode | string }} FileError
+ * @typedef {{ file: File, errors: FileError[] }} FileRejection
+ */
