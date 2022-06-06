@@ -8,8 +8,8 @@ export const notificationBase = props => {
   showNotification({
     id: props.id,
     disallowClose: props.disallowClose,
-    onClose: () => props.closeCB,
-    onOpen: () => props.openCB,
+    onClose: e => (props.closeCB !== undefined ? props.closeCB(e) : () => {}),
+    onOpen: e => (props.openCB !== undefined ? props.openCB(e) : () => {}),
     autoClose: props.autoClose,
     title: props.title,
     message: props.message,
@@ -33,10 +33,10 @@ export const Notifications = {
   },
   error: (message, options) => {
     notificationBase({
+      ...options,
       message,
       color: "red",
       icon: <X strokeWidth={ICON_STROKE_WIDTH} color="red" />,
-      ...options,
     });
   },
 };
