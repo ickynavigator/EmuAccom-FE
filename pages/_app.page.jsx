@@ -1,6 +1,7 @@
 import { ColorSchemeProvider, MantineProvider } from "@mantine/core";
-import { useColorScheme } from "@mantine/hooks";
-import React, { useState } from "react";
+import { useLocalStorage } from "@mantine/hooks";
+import { NotificationsProvider } from "@mantine/notifications";
+import React from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import Layout from "../components/Layout";
 import MetaHeader from "../components/MetaHeader";
@@ -9,8 +10,12 @@ import { StateProvider } from "../context/store";
 import "../styles/globals.scss";
 
 function App({ Component, pageProps }) {
-  const preferredColorScheme = useColorScheme();
-  const [colorScheme, setColorScheme] = useState(preferredColorScheme);
+  const [colorScheme, setColorScheme] = useLocalStorage({
+    key: "mantine-color-scheme",
+    defaultValue: "light",
+    getInitialValueInEffect: true,
+  });
+
   const toggleColorScheme = value =>
     setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
 
@@ -25,10 +30,12 @@ function App({ Component, pageProps }) {
           withGlobalStyles
           withNormalizeCSS
         >
-          <Layout>
-            <MetaHeader />
-            <Component {...pageProps} />
-          </Layout>
+          <NotificationsProvider>
+            <Layout>
+              <MetaHeader />
+              <Component {...pageProps} />
+            </Layout>
+          </NotificationsProvider>
         </MantineProvider>
       </ColorSchemeProvider>
     </StateProvider>
