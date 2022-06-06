@@ -24,7 +24,6 @@ const GridCard = props => {
             src={imgSrc}
             height={200}
             alt={imgAlt}
-            withPlaceholder
             placeholder={<Text align="center">{imgAlt}</Text>}
           />
         </Card.Section>
