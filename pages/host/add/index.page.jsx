@@ -47,7 +47,7 @@ const Index = () => {
       addressLine: "",
       city: "",
       postalCode: "",
-      country: "",
+      country: "Cyprus",
       bedCount: 0,
       bedroomCount: 0,
       bathroomCount: 0,
@@ -124,6 +124,7 @@ const Index = () => {
       pictures: values.pictures,
       keywords: stringToKeywords(values.keywords),
       management: state.manager.id,
+      approved: false,
     };
 
     const res = await (propertyType === "dorm"
@@ -142,7 +143,7 @@ const Index = () => {
       formDetails.reset();
     } else {
       setError(true);
-      setErrorMessage(res.data.message);
+      setErrorMessage(res.response.data.message);
     }
   };
 
@@ -265,7 +266,7 @@ const Index = () => {
           id="bathroomCount"
           label="Bathroom Count"
           placeholder="Enter bathroom count"
-          {...formDetails.getInputProps("bathCount")}
+          {...formDetails.getInputProps("bathroomCount")}
         />
         <NumberInput
           required
