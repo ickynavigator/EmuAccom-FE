@@ -28,3 +28,16 @@ export function isBlankOrUndefined(value) {
   }
   return isBlank(value);
 }
+
+export const NumberInputCurrencyParser = (value = "") =>
+  value.replace(/\$\s?|(,*)/g, "");
+
+export const NumberInputCurrencyFormatter = (value = "") =>
+  !Number.isNaN(parseFloat(value))
+    ? `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    : "";
+
+export const stringToKeywords = (value = "") => {
+  const keywords = value.split(",");
+  return keywords.map(keyword => ({ tag: keyword.trim() }));
+};
