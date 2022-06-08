@@ -1,3 +1,4 @@
+// / <reference path="../types/typedefs.js"
 import axios from "axios";
 import { isBlankOrUndefined } from "./stringTools";
 
@@ -173,4 +174,18 @@ export const verifyMangerToken = token => {
     },
   };
   return axios.get(url, config);
+};
+
+/** @param {Dormitory} data */
+export const addNewDorm = data => {
+  // data is already expected to be validated
+  const res = axios.post(`${serverURL}/dorm`, data);
+  return res;
+};
+
+/** @param {Home} data */
+export const addNewHome = data => {
+  // data is already expected to be validated
+  const res = axios.post(`${serverURL}/house`, data);
+  return res;
 };
