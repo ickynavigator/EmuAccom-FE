@@ -37,7 +37,7 @@ export const NumberInputCurrencyFormatter = (value = "") =>
     ? `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     : "";
 
-export const stringToKeywords = (value = "") => {
-  const keywords = value.split(",");
-  return keywords.map(keyword => ({ tag: keyword.trim() }));
-};
+export const stringToKeywords = (value = "") =>
+  value.length > 0
+    ? value.split(",").map(keyword => ({ tag: keyword.trim() }))
+    : [];
