@@ -7,9 +7,9 @@ import { AUTHENTICATE_USER, LOGIN_USER, LOGOUT_USER } from "../constants";
  * @param {User} details
  */
 const storeLoginDetails = details => {
-  const { email, firstName, lastName, token } = details;
+  const { _id: id, email, firstName, lastName, token } = details;
 
-  return { email, firstName, lastName, token, isAuthenticated: true };
+  return { id, email, firstName, lastName, token, isAuthenticated: true };
 };
 
 /**

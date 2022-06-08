@@ -3,6 +3,7 @@
 /**
  * User state type.
  * @typedef {{
+ *            id: string,
  *            email: string,
  *            firstName: string,
  *            lastName: string,
@@ -64,6 +65,7 @@
 /**
  *  This is the type of the Manager object
  *  @typedef {{
+ *      id: string,
  *      businessName: string,
  *      managerFirstName: string,
  *      managerLastName: string,
