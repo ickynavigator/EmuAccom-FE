@@ -3,6 +3,7 @@
 /**
  * User state type.
  * @typedef {{
+ *            id: string,
  *            email: string,
  *            firstName: string,
  *            lastName: string,
@@ -15,6 +16,7 @@
  * This is the type of the state object
  * @typedef {{
  *           user: User,
+ *           manager: Manager
  *          }} AppState
  */
 
@@ -58,4 +60,23 @@
  *      approved: boolean,
  *      management: string,
  *  }} Dormitory
+ */
+
+/**
+ *  This is the type of the Manager object
+ *  @typedef {{
+ *      id: string,
+ *      businessName: string,
+ *      managerFirstName: string,
+ *      managerLastName: string,
+ *      managerEmail: string,
+ *      managerDescription: string,
+ *      type: string,
+ *  }} Manager
+ */
+
+/**
+ * @typedef {( "file-invalid-type" | "file-too-large" | "file-too-small" | "too-many-files" )} ErrorCode
+ * @typedef {{ message: string, code: ErrorCode | string }} FileError
+ * @typedef {{ file: File, errors: FileError[] }} FileRejection
  */

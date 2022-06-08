@@ -12,21 +12,21 @@ import { useForm } from "@mantine/form";
 import { NextLink } from "@mantine/next";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
-import { LOGIN_USER } from "../../context/constants";
-import { store } from "../../context/store";
-import { useAuth } from "../../hooks";
-import { signInRequest } from "../../utils/axiosRequests";
-import { regexPatterns } from "../../utils/stringTools";
+import { LOGIN_MANAGER } from "../../../context/constants";
+import { store } from "../../../context/store";
+import { useManagerAuth } from "../../../hooks";
+import { signInManagerRequest } from "../../../utils/axiosRequests";
+import { regexPatterns } from "../../../utils/stringTools";
 
 const Index = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useManagerAuth();
   const { dispatch } = useContext(store);
   const router = useRouter();
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   useEffect(() => {
     if (isAuthenticated) {
-      router.push("/");
+      router.push("/host");
     }
   });
 
@@ -46,12 +46,15 @@ const Index = () => {
 
   const submitHandler = async values => {
     setError(false);
+    setErrorMessage("");
+
     try {
-      const res = await signInRequest(values);
+      const res = await signInManagerRequest(values);
       const { data, status } = res;
+
       if (status === 200) {
-        dispatch({ type: LOGIN_USER, payload: data });
-        const returnUrl = router.query.redirect || "/";
+        dispatch({ type: LOGIN_MANAGER, payload: data });
+        const returnUrl = router.query.redirect || "/host";
         router.push(returnUrl);
         return;
       }
@@ -60,7 +63,6 @@ const Index = () => {
       if (res.response.status === 401) {
         setErrorMessage(res.response.data.message);
       }
-      setError(true);
     } catch (err) {
       setError(true);
     }
@@ -84,15 +86,17 @@ const Index = () => {
         <form onSubmit={formDetails.onSubmit(submitHandler)}>
           <TextInput
             required
+            id="email"
             label="Email"
-            placeholder="Enter your email"
+            placeholder="Enter your Manager email"
             type="email"
             {...formDetails.getInputProps("email")}
           />
           <TextInput
             required
+            id="password"
             label="Password"
-            placeholder="Enter your password"
+            placeholder="Enter your Manager password"
             type="password"
             {...formDetails.getInputProps("password")}
           />
@@ -101,13 +105,12 @@ const Index = () => {
           </Group>
         </form>
       </Box>
-
       <Group mt="md" position="center">
-        <Anchor component={NextLink} href="/signup">
+        <Anchor component={NextLink} href="/host/signup">
           Not Signed Up yet?
         </Anchor>
         <Divider sx={{ height: "24px" }} size="md" orientation="vertical" />
-        <Anchor component={NextLink} href="/login/forgot-password">
+        <Anchor component={NextLink} href="/host/forgot-password">
           Forgot Password?
         </Anchor>
       </Group>

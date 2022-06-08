@@ -1,4 +1,6 @@
+// / <reference path="../types/typedefs.js"
 import axios from "axios";
+import { isBlankOrUndefined } from "./stringTools";
 
 /** REQUEST HELPERS */
 export const serverBase = (environment = "development") => {
@@ -24,30 +26,31 @@ export const axiosResolvers = {
     }
     return Promise.reject(error);
   },
+  401: error => {
+    if (error.response.status === 401) {
+      return Promise.resolve(error);
+    }
+    return Promise.reject(error);
+  },
 };
+/**
+ * @param {{key: string, val: string | number | boolean }[]} params
+ * @returns {string}
+ */
 export const paramParser = params => {
   let paramString = "?";
-  for (let i = 0; i < params.length; i += 1) {
-    if (params[i].val.length > 1)
-      paramString += `${params[i].key}=${params[i].val}&`;
-  }
+  params.forEach(({ key, val }) => {
+    if (isBlankOrUndefined(val)) return;
 
-  return paramString;
+    paramString += `${key}=${val}&`;
+  });
+  return paramString.slice(0, -1);
 };
 
 /** REQUESTS */
 export const signInRequest = data => {
   // AXIOS INTERCEPTOR
-  axios.interceptors.response.use(
-    response => response,
-    error => {
-      if (error.response.status === 401) {
-        return Promise.resolve(error);
-      }
-      return Promise.reject(error);
-    },
-  );
-
+  axios.interceptors.response.use(response => response, axiosResolvers["401"]);
   const postData = {
     email: data.email,
     password: data.password,
@@ -76,14 +79,14 @@ export const fetchDorms = ({
   search = "",
   pageSize = 10,
   pageNumber = 1,
-  paginate = true,
+  noPaginate = false,
 }) => {
   const parsedParams = paramParser([
     { key: "param", val: searchParam },
     { key: "keyword", val: search },
     { key: "pageSize", val: pageSize },
     { key: "pageNumber", val: pageNumber },
-    { key: "paginate", val: paginate },
+    { key: "noPaginate", val: noPaginate },
   ]);
   return axios.get(`${serverURL}/dorm${parsedParams}`);
 };
@@ -93,14 +96,14 @@ export const fetchHomes = ({
   search = "",
   pageSize = 10,
   pageNumber = 1,
-  paginate = true,
+  noPaginate = false,
 }) => {
   const parsedParams = paramParser([
     { key: "param", val: searchParam },
     { key: "keyword", val: search },
     { key: "pageSize", val: pageSize },
     { key: "pageNumber", val: pageNumber },
-    { key: "paginate", val: paginate },
+    { key: "noPaginate", val: noPaginate },
   ]);
   return axios.get(`${serverURL}/house${parsedParams}`);
 };
@@ -136,13 +139,53 @@ export const signUpManagerRequest = data => {
     response => response,
     axiosResolvers["400-401"],
   );
-
   const postData = {
-    email: data.email,
+    businessName: data.businessName,
+    managerFirstName: data.managerFirstName,
+    managerLastName: data.managerLastName,
+    managerEmail: data.managerEmail,
+    managerDescription: data.managerDescription,
     password: data.password,
-    firstName: data.fName,
-    lastName: data.fName,
     type: data.type,
   };
-  return axios.post(`${serverURL}/users/manager`, postData);
+  return axios.post(`${serverURL}/manager`, postData);
+};
+
+export const signInManagerRequest = data => {
+  // AXIOS INTERCEPTOR
+  axios.interceptors.response.use(response => response, axiosResolvers["401"]);
+  const postData = {
+    managerEmail: data.email,
+    password: data.password,
+  };
+  return axios.post(`${serverURL}/manager/login`, postData);
+};
+
+export const verifyMangerToken = token => {
+  // AXIOS INTERCEPTOR
+  axios.interceptors.response.use(
+    response => response,
+    axiosResolvers["400-401"],
+  );
+  const url = `${serverURL}/manager/auth`;
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  return axios.get(url, config);
+};
+
+/** @param {Dormitory} data */
+export const addNewDorm = data => {
+  // data is already expected to be validated
+  const res = axios.post(`${serverURL}/dorm`, data);
+  return res;
+};
+
+/** @param {Home} data */
+export const addNewHome = data => {
+  // data is already expected to be validated
+  const res = axios.post(`${serverURL}/house`, data);
+  return res;
 };

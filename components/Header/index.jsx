@@ -10,11 +10,12 @@ import {
   Text,
   useMantineColorScheme,
 } from "@mantine/core";
+import { NextLink } from "@mantine/next";
 import React, { useContext, useState } from "react";
 import { MoonStars, Sun, User } from "tabler-icons-react";
-import { LOGOUT_USER } from "../../context/constants";
+import { LOGOUT_MANAGER, LOGOUT_USER } from "../../context/constants";
 import { store } from "../../context/store";
-import { useAuth } from "../../hooks";
+import { useAuth, useManagerAuth } from "../../hooks";
 
 export const MenuList = ({
   controlElement,
@@ -22,10 +23,14 @@ export const MenuList = ({
   onOpenCallback,
 }) => {
   const { isAuthenticated } = useAuth();
+  const { isAuthenticated: isManager } = useManagerAuth();
   const { dispatch } = useContext(store);
 
   const LogoutHandler = () => {
     dispatch({ type: LOGOUT_USER });
+  };
+  const LogoutManagerHandler = () => {
+    dispatch({ type: LOGOUT_MANAGER });
   };
 
   return (
@@ -42,35 +47,51 @@ export const MenuList = ({
     >
       {!isAuthenticated && (
         <>
-          <Anchor href="/signup" style={{ fontWeight: "bold" }}>
-            <Menu.Item>Sign Up</Menu.Item>
-          </Anchor>
-          <Anchor href="/login">
-            <Menu.Item>Login</Menu.Item>
-          </Anchor>
+          <Menu.Item component={NextLink} href="/signup">
+            Sign Up
+          </Menu.Item>
+          <Menu.Item component={NextLink} href="/login">
+            Login
+          </Menu.Item>
         </>
       )}
 
       <Menu.Label>Menu</Menu.Label>
-      <Anchor href="/dorm">
-        <Menu.Item>View Dorms</Menu.Item>
-      </Anchor>
-      <Anchor href="/home">
-        <Menu.Item>View Homes</Menu.Item>
-      </Anchor>
+      <Menu.Item component={NextLink} href="/dorm">
+        View Dorms
+      </Menu.Item>
+      <Menu.Item component={NextLink} href="/home">
+        View Homes
+      </Menu.Item>
 
       <Menu.Label>Hosting</Menu.Label>
-      <Anchor href="/host">
-        <Menu.Item>Register a dorm or home</Menu.Item>
-      </Anchor>
+
+      {isManager ? (
+        <>
+          <Menu.Item component={NextLink} href="/host">
+            View dashboard
+          </Menu.Item>
+          <Menu.Item component={NextLink} href="/host/profile">
+            View manager profile
+          </Menu.Item>
+          <Menu.Item component={NextLink} href="/host/add">
+            Add new property
+          </Menu.Item>
+          <Menu.Item onClick={LogoutManagerHandler}>Logout manager</Menu.Item>
+        </>
+      ) : (
+        <Menu.Item component={NextLink} href="/host">
+          Register a dorm or home
+        </Menu.Item>
+      )}
 
       {isAuthenticated && (
         <>
           <Menu.Label>User</Menu.Label>
 
-          <Anchor href="/profile">
-            <Menu.Item>Profile</Menu.Item>
-          </Anchor>
+          <Menu.Item component={NextLink} href="/profile">
+            Profile
+          </Menu.Item>
           <Menu.Item onClick={LogoutHandler}>Logout</Menu.Item>
         </>
       )}

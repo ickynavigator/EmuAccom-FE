@@ -1,10 +1,14 @@
 /// <reference path="../../types/typedefs.js" />
-import { AUTHENTICATE_USER, LOGIN_USER, LOGOUT_USER } from "../constants";
+import {
+  AUTHENTICATE_MANAGER,
+  LOGIN_MANAGER,
+  LOGOUT_MANAGER,
+} from "../constants";
 
 /**
- * Accepts the user login, parses and returns a structured
+ * Accepts the manager login details, parses and returns a structured
  * object for the reducer state
- * @param {User} details
+ * @param {Manager} details
  */
 const storeLoginDetails = details => {
   const { _id: id, email, firstName, lastName, token } = details;
@@ -14,24 +18,24 @@ const storeLoginDetails = details => {
 
 /**
  * User reducer
- * @param {User} state
+ * @param {Manager} state
  * @param {{type:string, payload:any}} action
  *
- * @return {User}
+ * @return {Manager}
  */
-export const userReducer = (state, action) => {
+export const managerReducer = (state, action) => {
   switch (action?.type) {
-    case LOGIN_USER: {
-      const userDetails = storeLoginDetails(action.payload);
+    case LOGIN_MANAGER: {
+      const managerDetails = storeLoginDetails(action.payload);
       return {
         ...state,
-        ...userDetails,
+        ...managerDetails,
       };
     }
-    case LOGOUT_USER: {
+    case LOGOUT_MANAGER: {
       return {};
     }
-    case AUTHENTICATE_USER: {
+    case AUTHENTICATE_MANAGER: {
       return {
         ...state,
         isAuthenticated: action.payload,

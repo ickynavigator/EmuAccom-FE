@@ -1,48 +1,49 @@
 import {
   Alert,
+  Anchor,
   Button,
   Checkbox,
   Container,
   Group,
+  Space,
+  Textarea,
   TextInput,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { useRouter } from "next/router";
-import React, { useContext, useEffect, useState } from "react";
-import { LOGIN_USER } from "../../context/constants";
-import { store } from "../../context/store";
-import { useAuth } from "../../hooks";
-import { signUpRequest } from "../../utils/axiosRequests";
-import { regexPatterns } from "../../utils/stringTools";
+import { NextLink } from "@mantine/next";
+import Router from "next/router";
+import React, { useContext, useState } from "react";
+import { LOGIN_MANAGER } from "../../../context/constants";
+import { store } from "../../../context/store";
+import WithAuthenticated from "../../../HOC/withAuthenticated";
+import { signUpManagerRequest } from "../../../utils/axiosRequests";
+import { regexPatterns } from "../../../utils/stringTools";
 
 const Index = () => {
-  const { isAuthenticated } = useAuth();
   const { dispatch } = useContext(store);
-  const router = useRouter();
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  useEffect(() => {
-    if (isAuthenticated) {
-      router.push("/");
-    }
-  });
 
   const formDetails = useForm({
     initialValues: {
-      fName: "",
-      lName: "",
-      email: "",
+      businessName: "",
+      managerFirstName: "",
+      managerLastName: "",
+      managerEmail: "",
+      managerDescription: "",
       password: "",
       confirmPassword: "",
       termsOfService: false,
     },
 
     validate: {
-      fName: value =>
+      businessName: value =>
+        regexPatterns.text.test(value) ? null : "Invalid business name",
+      managerFirstName: value =>
         regexPatterns.name.test(value) ? null : "Invalid first name",
-      lName: value =>
+      managerLastName: value =>
         regexPatterns.name.test(value) ? null : "Invalid last name",
-      email: value =>
+      managerEmail: value =>
         regexPatterns.email.test(value) ? null : "Invalid email",
       password: value =>
         regexPatterns.password.test(value) ? null : "Invalid password",
@@ -55,6 +56,9 @@ const Index = () => {
     },
   });
 
+  /**
+   * @param {typeof formDetails.values} values
+   */
   const submitHandler = async values => {
     setError(false);
     setErrorMessage("");
@@ -66,15 +70,15 @@ const Index = () => {
     }
 
     try {
-      const res = await signUpRequest({
+      const res = await signUpManagerRequest({
         ...values,
-        type: "student",
+        type: "manager",
       });
       const { data, status } = res;
       if (status === 201) {
-        dispatch({ type: LOGIN_USER, payload: data });
-        const returnUrl = router.query.redirect || "/";
-        router.push(returnUrl);
+        dispatch({ type: LOGIN_MANAGER, payload: data });
+        const returnUrl = Router.query.redirect || "/host/profile";
+        Router.push(returnUrl);
         return;
       }
 
@@ -105,27 +109,46 @@ const Index = () => {
       <form onSubmit={formDetails.onSubmit(submitHandler)}>
         <TextInput
           required
-          id="FirstName"
-          label="First Name"
-          placeholder="Enter your first name"
+          label="Business Name"
+          placeholder="Enter your business name"
           type="text"
-          {...formDetails.getInputProps("fName")}
+          {...formDetails.getInputProps("businessName")}
         />
         <TextInput
           required
-          id="LastName"
-          label="Last Name"
-          placeholder="Enter your last name"
+          id="managerFirstName"
+          label="Manager First Name"
+          placeholder="Enter the manager's first name"
           type="text"
-          {...formDetails.getInputProps("lName")}
+          {...formDetails.getInputProps("managerFirstName")}
         />
+        <TextInput
+          required
+          id="managerLastName"
+          label="Manager Last Name"
+          placeholder="Enter the manager's last name"
+          type="text"
+          {...formDetails.getInputProps("managerLastName")}
+        />
+        <Textarea
+          id="managerDescription"
+          label="Manager Description"
+          placeholder="Enter the manager's description"
+          autosize
+          minRows={2}
+          maxRows={5}
+          {...formDetails.getInputProps("managerDescription")}
+        />
+
+        <Space h="xl" />
+
         <TextInput
           required
           id="Email"
           label="Email"
           placeholder="Enter your email"
           type="email"
-          {...formDetails.getInputProps("email")}
+          {...formDetails.getInputProps("managerEmail")}
         />
         <TextInput
           required
@@ -147,14 +170,22 @@ const Index = () => {
           mt="md"
           id="ToS"
           label="I agree to the terms of service"
-          {...formDetails.getInputProps("termsOfService", { type: "checkbox" })}
+          {...formDetails.getInputProps("termsOfService", {
+            type: "checkbox",
+          })}
         />
         <Group position="right" mt="md">
           <Button type="submit">Sign Up</Button>
         </Group>
       </form>
+
+      <Group mt="md" position="center">
+        <Anchor component={NextLink} href="/host/login">
+          Already Signed Up?
+        </Anchor>
+      </Group>
     </Container>
   );
 };
 
-export default Index;
+export default WithAuthenticated(Index);
