@@ -3,6 +3,7 @@ import {
   AUTHENTICATE_MANAGER,
   LOGIN_MANAGER,
   LOGOUT_MANAGER,
+  UPDATE_MANAGER,
 } from "../constants";
 
 /**
@@ -58,6 +59,13 @@ export const managerReducer = (state, action) => {
       return {
         ...state,
         isAuthenticated: action.payload,
+      };
+    }
+    case UPDATE_MANAGER: {
+      const managerDetails = storeLoginDetails(action.payload);
+      return {
+        ...state,
+        ...managerDetails,
       };
     }
     default: {
