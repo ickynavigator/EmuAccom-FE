@@ -55,6 +55,9 @@ export const MenuList = ({
           </Menu.Item>
         </>
       )}
+      <Menu.Item component={NextLink} href="/about">
+        About
+      </Menu.Item>
 
       <Menu.Label>Menu</Menu.Label>
       <Menu.Item component={NextLink} href="/dorm">

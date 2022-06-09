@@ -189,3 +189,35 @@ export const addNewHome = data => {
   const res = axios.post(`${serverURL}/house`, data);
   return res;
 };
+
+/** @param {User} data */
+export const updateUserInfo = data => {
+  // AXIOS INTERCEPTOR
+  axios.interceptors.response.use(
+    response => response,
+    axiosResolvers["400-401"],
+  );
+  const url = `${serverURL}/users/profile`;
+  const config = {
+    headers: {
+      Authorization: `Bearer ${data.token}`,
+    },
+  };
+  return axios.put(url, data, config);
+};
+
+/** @param {Manager} data */
+export const updateManagerInfo = data => {
+  // AXIOS INTERCEPTOR
+  axios.interceptors.response.use(
+    response => response,
+    axiosResolvers["400-401"],
+  );
+  const url = `${serverURL}/manager/profile`;
+  const config = {
+    headers: {
+      Authorization: `Bearer ${data.token}`,
+    },
+  };
+  return axios.put(url, data, config);
+};

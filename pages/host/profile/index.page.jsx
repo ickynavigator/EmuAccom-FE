@@ -4,23 +4,24 @@ import {
   Button,
   Container,
   Stack,
+  Textarea,
   TextInput,
   Title,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import React, { useContext, useState } from "react";
-import { UPDATE_USER } from "../../context/constants";
-import { store } from "../../context/store";
-import WithAuthenticated from "../../HOC/withAuthenticated";
-import { updateUserInfo } from "../../utils/axiosRequests";
-import Notifications from "../../utils/Notifications";
-import { isDev } from "../../utils/serverHelpers";
-import { isBlank, regexPatterns } from "../../utils/stringTools";
+import { UPDATE_MANAGER } from "../../../context/constants";
+import { store } from "../../../context/store";
+import WithAuthenticated from "../../../HOC/withAuthenticated";
+import { updateManagerInfo } from "../../../utils/axiosRequests";
+import Notifications from "../../../utils/Notifications";
+import { isDev } from "../../../utils/serverHelpers";
+import { isBlank, regexPatterns } from "../../../utils/stringTools";
 
 const Index = () => {
-  const { state, dispatch } = useContext(store);
+  const { state } = useContext(store);
   /** @type {AppState} state */
-  const { user } = state;
+  const { manager, dispatch } = state;
 
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState(false);
@@ -28,16 +29,24 @@ const Index = () => {
 
   const formDetails = useForm({
     initialValues: {
-      email: user.email,
-      firstName: user.firstName,
-      lastName: user.lastName,
+      businessName: manager.businessName,
+      managerEmail: manager.managerEmail,
+      managerFirstName: manager.managerFirstName,
+      managerLastName: manager.managerLastName,
+      managerDescription: manager.managerDescription,
       password: "",
       confirmPassword: "",
     },
     validate: {
-      email: value => (value.length > 0 ? null : "Email is required"),
-      firstName: value => (value.length > 0 ? null : "First Name is required"),
-      lastName: value => (value.length > 0 ? null : "Last Name is required"),
+      businessName: value =>
+        value.length > 0 ? null : "Business Name is required",
+      managerEmail: value => (value.length > 0 ? null : "Email is required"),
+      managerFirstName: value =>
+        value.length > 0 ? null : "First Name is required",
+      managerLastName: value =>
+        value.length > 0 ? null : "Last Name is required",
+      managerDescription: value =>
+        value.length > 0 ? null : "Description is required",
       password: value =>
         isBlank(value) && value.length <= 0
           ? null
@@ -61,27 +70,31 @@ const Index = () => {
     setLoading(true);
     try {
       const formData = {
-        email: values.email,
-        firstName: values.firstName,
-        lastName: values.lastName,
+        businessName: values.businessName,
+        managerEmail: values.managerEmail,
+        managerFirstName: values.managerFirstName,
+        managerLastName: values.managerLastName,
+        managerDescription: values.managerDescription,
         password: values.password,
-        token: user.token,
+        token: manager.token,
       };
 
       if (isBlank(values.password)) delete formData.password;
-      const res = await updateUserInfo(formData);
+      const res = await updateManagerInfo(formData);
 
       if (res.status === 200) {
         formDetails.setValues({
-          email: res.data.email,
-          firstName: res.data.firstName,
-          lastName: res.data.lastName,
+          businessName: res.data.businessName,
+          managerEmail: res.data.managerEmail,
+          managerFirstName: res.data.managerFirstName,
+          managerLastName: res.data.managerLastName,
+          managerDescription: res.data.managerDescription,
           password: "",
           confirmPassword: "",
         });
 
         Notifications.success("Profile updated successfully");
-        dispatch({ type: UPDATE_USER, payload: res.data });
+        dispatch({ type: UPDATE_MANAGER, payload: res.data });
       } else {
         setError(true);
         if (res.response.status === 401) {
@@ -117,23 +130,38 @@ const Index = () => {
       <form onSubmit={formDetails.onSubmit(submitHandler)}>
         <Stack my="md">
           <TextInput
-            id="email"
-            label="Email"
+            id="businessName"
+            label="Business Name"
+            placeholder="Enter your business name"
+            {...formDetails.getInputProps("businessName")}
+          />
+          <TextInput
+            id="managerEmail"
+            label="Manager Email"
             placeholder="Enter your email"
             type="email"
-            {...formDetails.getInputProps("email")}
+            {...formDetails.getInputProps("managerEmail")}
           />
           <TextInput
-            id="firstName"
-            label="First Name"
+            id="managerfirstName"
+            label="Manager First Name"
             placeholder="Enter your first name"
-            {...formDetails.getInputProps("firstName")}
+            {...formDetails.getInputProps("managerfirstName")}
           />
           <TextInput
-            id="lastName"
-            label="Last Name"
+            id="managerlastName"
+            label="Manager Last Name"
             placeholder="Enter your last name"
-            {...formDetails.getInputProps("lastName")}
+            {...formDetails.getInputProps("managerlastName")}
+          />
+          <Textarea
+            id="managerDescription"
+            label="Manager Description"
+            placeholder="Enter the manager's description"
+            autosize
+            minRows={2}
+            maxRows={5}
+            {...formDetails.getInputProps("managerDescription")}
           />
           <TextInput
             id="password"
