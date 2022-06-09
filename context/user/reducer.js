@@ -1,5 +1,10 @@
 /// <reference path="../../types/typedefs.js" />
-import { AUTHENTICATE_USER, LOGIN_USER, LOGOUT_USER } from "../constants";
+import {
+  AUTHENTICATE_USER,
+  LOGIN_USER,
+  LOGOUT_USER,
+  UPDATE_USER,
+} from "../constants";
 
 /**
  * Accepts the user login, parses and returns a structured
@@ -35,6 +40,13 @@ export const userReducer = (state, action) => {
       return {
         ...state,
         isAuthenticated: action.payload,
+      };
+    }
+    case UPDATE_USER: {
+      const updatedUserDetails = storeLoginDetails(action.payload);
+      return {
+        ...state,
+        ...updatedUserDetails,
       };
     }
     default: {

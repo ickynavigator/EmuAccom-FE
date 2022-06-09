@@ -9,6 +9,7 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import React, { useContext, useState } from "react";
+import { UPDATE_USER } from "../../context/constants";
 import { store } from "../../context/store";
 import WithAuthenticated from "../../HOC/withAuthenticated";
 import { updateUserInfo } from "../../utils/axiosRequests";
@@ -17,7 +18,7 @@ import { isDev } from "../../utils/serverHelpers";
 import { isBlank, regexPatterns } from "../../utils/stringTools";
 
 const Index = () => {
-  const { state } = useContext(store);
+  const { state, dispatch } = useContext(store);
   /** @type {AppState} state */
   const { user } = state;
 
@@ -36,7 +37,7 @@ const Index = () => {
     validate: {
       email: value => (value.length > 0 ? null : "Email is required"),
       firstName: value => (value.length > 0 ? null : "First Name is required"),
-      lastName: value => (value.length > 0 ? null : "Name is required"),
+      lastName: value => (value.length > 0 ? null : "Last Name is required"),
       password: value =>
         isBlank(value) && value.length <= 0
           ? null
@@ -80,6 +81,7 @@ const Index = () => {
         });
 
         Notifications.success("Profile updated successfully");
+        dispatch({ type: UPDATE_USER, payload: res.data });
       } else {
         setError(true);
         if (res.response.status === 401) {
