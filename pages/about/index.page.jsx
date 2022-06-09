@@ -1,5 +1,24 @@
-import { Anchor, Container, Divider, Text, Title } from "@mantine/core";
+import { Anchor, Container, Divider, Paper, Text, Title } from "@mantine/core";
 import React from "react";
+import QRCode from "react-qr-code";
+
+const PaperWrap = ({ children }) => (
+  <Paper
+    shadow="xl"
+    radius="md"
+    p="xs"
+    withBorder
+    sx={theme => ({
+      backgroundColor:
+        theme.colorScheme === "dark"
+          ? theme.colors.dark[6]
+          : theme.colors.gray[0],
+      width: "fit-content",
+    })}
+  >
+    {children}
+  </Paper>
+);
 
 const Index = () => {
   const githubFE = "https://github.com/ickynavigator/EmuAccom-FE";
@@ -35,10 +54,19 @@ const Index = () => {
         Our website is available here:{" "}
         <Anchor href={herokuFE}>{herokuFE}</Anchor>
       </Text>
+
+      <PaperWrap>
+        <QRCode value={herokuFE} level="H" size={256} />
+      </PaperWrap>
+
       <Text>
         Our backend/API is available here:{" "}
         <Anchor href={herokuBE}>{herokuBE}</Anchor>
       </Text>
+
+      <PaperWrap>
+        <QRCode value={herokuBE} level="H" size={256} />
+      </PaperWrap>
 
       <Divider
         mt="md"
