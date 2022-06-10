@@ -7,7 +7,7 @@ import { verifyMangerToken } from "../utils/axiosRequests";
 // import WithAuthenticated from "./withAuthenticated";
 
 const WithManager = Component => {
-  const ManagerOnlyComponent = () => {
+  const ManagerOnlyComponent = props => {
     const { state, dispatch } = useContext(store);
     const Router = useRouter();
     const [isLoading, setIsLoading] = useState(true);
@@ -42,7 +42,11 @@ const WithManager = Component => {
       verifyManager();
     }, [verifyManager]);
 
-    return isLoading ? <Loader size="xl" /> : isManager && <Component />;
+    return isLoading ? (
+      <Loader size="xl" />
+    ) : (
+      isManager && <Component {...props} />
+    );
   };
 
   return ManagerOnlyComponent;
