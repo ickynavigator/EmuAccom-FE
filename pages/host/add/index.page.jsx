@@ -21,6 +21,7 @@ import { Carousel } from "react-responsive-carousel";
 import { CurrencyLira } from "tabler-icons-react";
 import PictureUpload from "../../../components/PictureUpload";
 import { store } from "../../../context/store";
+import WithManager from "../../../HOC/withManager";
 import { addNewDorm, addNewHome } from "../../../utils/axiosRequests";
 import { handleFileUpload } from "../../../utils/cloudinary";
 import Notifications from "../../../utils/Notifications";
@@ -362,4 +363,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default WithManager(Index);
