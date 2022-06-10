@@ -260,3 +260,33 @@ export const deleteProperty = (token, type, id) => {
   };
   return axios.delete(`${serverURL}/manager/${routeType}/${id}`, config);
 };
+
+export const updateDorm = (form, id) => {
+  // AXIOS INTERCEPTOR
+  axios.interceptors.response.use(
+    response => response,
+    axiosResolvers["400-401"],
+  );
+  const url = `${serverURL}/dorm/${id}`;
+  const config = {
+    headers: {
+      Authorization: `Bearer ${form.token}`,
+    },
+  };
+  return axios.put(url, form, config);
+};
+
+export const updateHome = (form, id) => {
+  // AXIOS INTERCEPTOR
+  axios.interceptors.response.use(
+    response => response,
+    axiosResolvers["400-401"],
+  );
+  const url = `${serverURL}/house/${id}`;
+  const config = {
+    headers: {
+      Authorization: `Bearer ${form.token}`,
+    },
+  };
+  return axios.put(url, form, config);
+};

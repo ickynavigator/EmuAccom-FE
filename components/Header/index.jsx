@@ -11,7 +11,7 @@ import {
   useMantineColorScheme,
 } from "@mantine/core";
 import { NextLink } from "@mantine/next";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { MoonStars, Sun, User } from "tabler-icons-react";
 import { LOGOUT_MANAGER, LOGOUT_USER } from "../../context/constants";
 import { store } from "../../context/store";
@@ -24,7 +24,7 @@ export const MenuList = ({
 }) => {
   const { isAuthenticated } = useAuth();
   const { isAuthenticated: isManager } = useManagerAuth();
-  const { dispatch } = useContext(store);
+  const { dispatch } = React.useContext(store);
 
   const LogoutHandler = () => {
     dispatch({ type: LOGOUT_USER });
@@ -57,6 +57,9 @@ export const MenuList = ({
       )}
       <Menu.Item component={NextLink} href="/about">
         About
+      </Menu.Item>
+      <Menu.Item component={NextLink} href="/FAQ">
+        FAQ
       </Menu.Item>
 
       <Menu.Label>Menu</Menu.Label>

@@ -5,17 +5,19 @@ import {
   Center,
   Container,
   Image,
+  List,
   SimpleGrid,
   Space,
   Text,
+  ThemeIcon,
   Title,
 } from "@mantine/core";
-import React, { useState } from "react";
-import { Heart, Home, User } from "tabler-icons-react";
+import React from "react";
+import { CircleCheck, Heart, Home, User } from "tabler-icons-react";
 
 const GridCard = props => {
   const { imgSrc, imgAlt, url, text } = props;
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = React.useState(false);
   return (
     <Center>
       <Card withBorder style={{ width: 300 }} className="scale-on-hover">
@@ -59,6 +61,43 @@ const Index = () => {
         A way to provide dorm and housing opportunities for students in Cyprus
         <Text>(and worldwide soon)</Text>
       </Title>
+
+      <Text>
+        We will help you find the right place to live, on or off campus, at an
+        affordable rent, throughout your studies.
+      </Text>
+
+      <Space h="xl" />
+
+      <Center>
+        <List
+          spacing="xs"
+          size="sm"
+          center
+          icon={
+            <ThemeIcon color="teal" size={24} radius="xl">
+              <CircleCheck size={16} />
+            </ThemeIcon>
+          }
+        >
+          <List.Item>
+            You can find rental houses and dormitories that suit your needs.
+          </List.Item>
+          <List.Item>
+            All rooms have a bed, desk and chair, reading lamp, bookshelf and
+            storage for clothes.
+          </List.Item>
+          <List.Item>
+            We offer several different price bands, from shared bedrooms to
+            studio flats.
+          </List.Item>
+          <List.Item>
+            Advertisements given under the supervision of Eastern Mediterranean
+            University are checked for prices, comfort and management for all
+            our students.
+          </List.Item>
+        </List>
+      </Center>
 
       <Space h="xl" />
 

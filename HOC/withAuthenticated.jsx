@@ -6,7 +6,7 @@ import { store } from "../context/store";
 import { verifyToken } from "../utils/axiosRequests";
 
 const WithAuthenticated = Component => {
-  const AuthenticatedComponent = () => {
+  const AuthenticatedComponent = props => {
     const { state, dispatch } = useContext(store);
     const Router = useRouter();
     const [isLoading, setIsLoading] = useState(true);
@@ -41,7 +41,11 @@ const WithAuthenticated = Component => {
       verifyTokenWrapper();
     }, [verifyTokenWrapper]);
 
-    return isLoading ? <Loader size="xl" /> : isAuthenticated && <Component />;
+    return isLoading ? (
+      <Loader size="xl" />
+    ) : (
+      isAuthenticated && <Component {...props} />
+    );
   };
 
   return AuthenticatedComponent;

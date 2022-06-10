@@ -19,46 +19,82 @@ import { getNames } from "country-list";
 import React, { useContext, useEffect, useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 import { CurrencyLira } from "tabler-icons-react";
-import PictureUpload from "../../../components/PictureUpload";
-import { store } from "../../../context/store";
-import WithManager from "../../../HOC/withManager";
-import { addNewDorm, addNewHome } from "../../../utils/axiosRequests";
-import { handleFileUpload } from "../../../utils/cloudinary";
-import Notifications from "../../../utils/Notifications";
+import PictureUpload from "../../../../components/PictureUpload";
+import { store } from "../../../../context/store";
+import WithManager from "../../../../HOC/withManager";
 import {
+  fetchSingleDormById,
+  fetchSingleHouseById,
+  updateDorm,
+  updateHome,
+} from "../../../../utils/axiosRequests";
+import { handleFileUpload } from "../../../../utils/cloudinary";
+import Notifications from "../../../../utils/Notifications";
+import {
+  isBlankOrUndefined,
+  keywordsToString,
   NumberInputCurrencyFormatter,
   NumberInputCurrencyParser,
   stringToKeywords,
-} from "../../../utils/stringTools";
+} from "../../../../utils/stringTools";
 
-const Index = () => {
+export const getServerSideProps = async ctx => {
+  const { id, type } = ctx.query;
+
+  if (isBlankOrUndefined(type) || isBlankOrUndefined(id)) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const res = await (type === "dorm"
+    ? fetchSingleDormById(id)
+    : fetchSingleHouseById(id));
+
+  if (res.status === 200) {
+    return {
+      props: {
+        property: res.data,
+        type,
+      },
+    };
+  }
+
+  return {
+    notFound: true,
+  };
+};
+
+const Index = props => {
+  const { property, type } = props;
+
   const { state } = useContext(store);
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
-  const [files, setFiles] = useState([]);
+  const [files, setFiles] = useState(property.pictures);
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [imageUploadDisabled, setImageUploadDisabled] = useState(true);
-  const [propertyType, setPropertyType] = useState("dorm");
+  const [propertyType, setPropertyType] = useState(type);
   const countries = getNames();
 
   const formDetails = useForm({
     initialValues: {
-      name: "",
-      description: "",
-      addressLine: "",
-      city: "",
-      postalCode: "",
-      country: "Cyprus",
-      bedCount: 0,
-      bedroomCount: 0,
-      bathroomCount: 0,
-      accomodateCount: 0,
-      availabilityCount: 0,
-      pricePerSemester: 0,
-      pricePerNight: 0,
-      pictures: [],
-      keywords: "",
-      management: "",
+      name: property.name,
+      description: property.description,
+      addressLine: property.address.addressLine,
+      city: property.address.city,
+      postalCode: property.address.postalCode,
+      country: property.address.country,
+      bedCount: property.bedCount,
+      bedroomCount: property.bedroomCount,
+      bathroomCount: property.bathroomCount,
+      accomodateCount: property.accomodateCount,
+      availabilityCount: property.availabilityCount,
+      pricePerSemester: property.pricePerSemester,
+      pricePerNight: property.pricePerNight,
+      pictures: property.pictures,
+      keywords: keywordsToString(property.keywords),
+      management: property.management,
     },
     validate: {
       name: value => (value.length > 0 ? null : "Name is required"),
@@ -129,11 +165,11 @@ const Index = () => {
     };
 
     const res = await (propertyType === "dorm"
-      ? addNewDorm(form)
-      : addNewHome(form));
+      ? updateDorm(form, property._id)
+      : updateHome(form, property._id));
 
     if (res.status === 201) {
-      Notifications.success("Property added successfully");
+      Notifications.success("Property updated successfully");
 
       setError(false);
       setErrorMessage("");
@@ -181,7 +217,7 @@ const Index = () => {
       <form onSubmit={formDetails.onSubmit(handleSubmit)}>
         <Select
           label="Property Type"
-          placeholder="Pick property"
+          disabled
           data={[
             { value: "dorm", label: "Dormitory" },
             { value: "home", label: "Home" },
