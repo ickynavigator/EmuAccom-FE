@@ -32,7 +32,7 @@ const DeleteButton = ({ id, type, setErrorMessage, delCB }) => {
   const handleDelete = async () => {
     setLoading(true);
     const res = await deleteProperty(state.manager.token, type, id);
-    if (res.status === 200) {
+    if (res.status === 204) {
       setLoading(false);
       Notifications.success("Successfully deleted");
       delCB({ id });
