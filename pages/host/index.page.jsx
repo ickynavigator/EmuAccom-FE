@@ -65,7 +65,11 @@ const Rows = ({ elems, type, setErrorMessage, delCB }) => {
         <Center>
           {[
             { id: "view", text: "View", href: `/${type}/${elem._id}` },
-            { id: "edit", text: "Edit", href: `/host/edit/${elem._id}` },
+            {
+              id: "edit",
+              text: "Edit",
+              href: `/host/edit/${elem._id}?type=${type}`,
+            },
           ].map(ActionButton)}
           <DeleteButton
             id={elem._id}
