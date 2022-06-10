@@ -11,7 +11,7 @@ const Index = () => {
     {
       question: "How can I post a advertisements?",
       answer:
-        "Dormitory companies must apply from the registration offices of our university. Hosts can register directly on our website and post their advertisements.",
+        "Hosts can register directly on our website and post their advertisements.",
     },
     {
       question: "How does the Eastern Mediterranean University control posts?",
