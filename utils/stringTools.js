@@ -41,3 +41,11 @@ export const stringToKeywords = (value = "") =>
   value.length > 0
     ? value.split(",").map(keyword => ({ tag: keyword.trim() }))
     : [];
+
+/** @param {[{ tag: { type: string} }]} value */
+export const keywordsToString = value => {
+  if (value.length > 0) {
+    return value.map(keyword => keyword.tag).join(", ");
+  }
+  return "";
+};
