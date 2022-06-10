@@ -44,6 +44,7 @@
 /**
  *  This is the type of the Dorm object
  *  @typedef {{
+ *      _id: string,
  *      name: string,
  *      description: string,
  *      address: Address,
