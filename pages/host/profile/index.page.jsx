@@ -12,7 +12,7 @@ import { useForm } from "@mantine/form";
 import React, { useContext, useState } from "react";
 import { UPDATE_MANAGER } from "../../../context/constants";
 import { store } from "../../../context/store";
-import WithAuthenticated from "../../../HOC/withAuthenticated";
+import WithManager from "../../../HOC/withManager";
 import { updateManagerInfo } from "../../../utils/axiosRequests";
 import Notifications from "../../../utils/Notifications";
 import { isDev } from "../../../utils/serverHelpers";
@@ -190,4 +190,4 @@ const Index = () => {
   );
 };
 
-export default WithAuthenticated(Index);
+export default WithManager(Index);
