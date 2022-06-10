@@ -221,3 +221,42 @@ export const updateManagerInfo = data => {
   };
   return axios.put(url, data, config);
 };
+
+export const fetchAllLoggedInManagerProperties = token => {
+  // AXIOS INTERCEPTOR
+  axios.interceptors.response.use(
+    response => response,
+    axiosResolvers["400-401"],
+  );
+  const url = `${serverURL}/manager/profile/property`;
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  return axios.get(url, config);
+};
+
+export const deleteProperty = (token, type, id) => {
+  // AXIOS INTERCEPTOR
+  axios.interceptors.response.use(
+    response => response,
+    axiosResolvers["400-401"],
+  );
+  const routeType = () => {
+    switch (type) {
+      case "dorm":
+        return `${serverURL}/manager/property/dorm/${id}`;
+      case "house":
+        return `${serverURL}/manager/property/house/${id}`;
+      default:
+        return "";
+    }
+  };
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+  return axios.delete(`${serverURL}/manager/${routeType()}/${id}`, config);
+};
